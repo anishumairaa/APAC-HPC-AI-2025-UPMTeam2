@@ -16,6 +16,10 @@ Our project for the APAC HPC AI Competition 2025 focuses on the implementation a
 
 # Objectives
 The objective is to leverage these advanced computational tools and high-performance computing resources to solve complex problems in quantum chemical molecular dynamics (NWChem) and large language model (DeepSeek) efficiently, with a primary focus on achieving maximum optimization.
+### NwChem
+In NWChem, we were tasked with running the NWChem input file with large, iterative matrix multiplications, and heavy operations within 5 minutes time constraint. We need **to improve performance by accomplishing lower processing time used by CPUs and elapsed time.**
+### DeepSeek-SGLang
+In DeepSeek-SGLang, we were tasked with running the DeepSeek-R1 model on the SGLang framework using the ShareGPT dataset, with the goal of completing execution within just 7 minutes. We are required **to improve performance by accomplishing higher value of total token processing speed and other metrics.**
 
 # Optimization Method
 ### NWChem
