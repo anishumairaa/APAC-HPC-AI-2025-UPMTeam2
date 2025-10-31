@@ -1,0 +1,50 @@
+---- SYSTEM SETTINGS ----
+
+module load cuda
+
+
+
+---- CONFIGURATION SETTINGS ----
+
+Number of nodes: 2 GPU nodes
+
+Total GPUs: 16
+
+Total CPUs: 224
+
+Total memory allocation: 3760GB 
+
+Benchmark prompts: 2000
+
+Load format: Dummy
+
+Random seed: 2025
+
+Time limit: 420 seconds
+
+MPI processes: 2 per node
+
+
+
+---- MODEL AND DATASET SETTINGS ----
+
+model_path = deepseek-ai/DeepSeek-R1
+
+dataset_path = ${HOME}/scratch/ShareGPT_V3_unfiltered_cleaned_split.json
+
+num_prompts = 2000
+
+load_format = dummy
+
+seed = 2025
+
+dtype = bfloat16
+
+trust_remote_code = True
+
+
+---- WARM UP SETTINGS ----
+
+num_prompts = 64
+
+All config settings are the same except for num_prompts
