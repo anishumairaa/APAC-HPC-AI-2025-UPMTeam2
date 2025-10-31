@@ -1,37 +1,32 @@
 
 # APAC HPC AI Competition 2024 - UPM Team3
 
-Welcome to our project submission for the APAC HPC AI Competition 2024. This README file provides an overview of our project, the methodologies used, and the results obtained.
+Welcome to our project submission for the APAC HPC-AI Competition 2025. This README file provides an overview of our project, the methodologies used, and the results obtained.
 
-Please review https://github.com/anishumairaa/HPC-AI-UPM-Team-3
+Please review https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2
 
 # Team Members
 * Anis Humaira Azman - Team leader
 * Nurul Farizatul Aina Mohammad Farizal
-* Maimunah Hosni
-* Wan Siti Aisyah Wan Kadir
-* Siti Nurinsyirah Pahrin
-* Azyan Syazwani Setia
+* Muhammad Aqil Iqbal Mohd Jamil
+* Muhammad Akmal Wanahari
 
 # Project Description
-Our project for the APAC HPC AI Competition 2024 focuses on the integration and optimization of HOOMD-blue and LLaMA2 LitGPT on the NCI and NSCC SG supercomputers.
+Our project for the APAC HPC AI Competition 2025 focuses on the implementation and optimization of NWChem and DeepSeek-SGLang on the NCI Gadi and NSCC Aspire2p SG supercomputers.
 
 # Objectives
-The objective is to leverage these advanced computational tools and high-performance computing resources to solve complex problems in molecular dynamics and natural language processing efficiently, with a primary focus on achieving maximum optimization.
+The objective is to leverage these advanced computational tools and high-performance computing resources to solve complex problems in quantum chemical molecular dynamics (NWChem) and large language model (DeepSeek) efficiently, with a primary focus on achieving maximum optimization.
 
-# Methodology
-[HOOMD Blue]
-* Calculate efficiency using total cores and speedup.
-* Try allocating different cores and nodes to increase the number of steps.
-* Result: Comparison on different number of nodes.
+# Optimization Method
+### NWChem
+* Implementation of fast storage
+* Application of OpenMP and MPI (Hybrid Parallelization)
+* Changes in input file
 
-[Llama2]
-* Optimization on MPI communication settings.
-* Result: Comparison on training time.
-  
-#
-* Programming Languages: Python
-* HPC Resources: Gadi HPC system, Aspire2U NSCC
+### DeepSeek-SGLang
+* NCCL communication tuning
+* CUDA efficiency settings
+* Warm-up execution
 
 # Results
 [HOOMD Blue]
