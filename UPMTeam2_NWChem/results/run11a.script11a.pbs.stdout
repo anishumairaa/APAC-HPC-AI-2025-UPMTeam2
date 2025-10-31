@@ -1,0 +1,1181 @@
+ argument  1 = /home/386/mj4785/scratch/mj4785/nwchem/input/w12_b3lyp_cc-pvtz_energy.nw
+ 
+
+
+============================== echo of input deck ==============================
+echo
+start w12_b3lyp_cc-pvtz_energy
+memory stack 8000 mb heap 100 mb global 8000 mb noverify
+permanent_dir .
+scratch_dir /scratch/${USER}/${PBS_JOBID}
+geometry units angstrom
+  O       1.79799517    -2.87189360    -0.91374020
+  O       0.96730604    -2.75911220     1.62798799
+  O       1.65380168    -0.07006642    -1.01974524
+  O       1.02235809     0.07175530     1.65572815
+  O      -1.02223258     0.06714841    -1.65231025
+  O      -1.65303657    -0.06953734     1.02328922
+  O      -1.79714075    -2.87225082     0.91489225
+  O      -0.96714604    -2.76268933    -1.62695366
+  O      -0.91046484     2.86984708    -1.80205865
+  O       1.62976535     2.75963881    -0.96492508
+  O       0.90962365     2.87584732     1.79706100
+  O      -1.63064745     2.76057720     0.96075175
+  H       1.58187452    -2.90533857     0.05372043
+  H       2.45880812    -3.55319457    -1.06640225
+  H      -1.58013630    -2.90956053    -0.05228132
+  H      -2.45728026    -3.55363054     1.07010099
+  H       0.05632428     2.90394112    -1.58314254
+  H      -1.06231290     3.55393270    -2.46019459
+  H      -1.56680088     2.89107809    -0.00131897
+  H      -1.92210192     1.83983329     1.06475175
+  H       1.34757079     0.06744042     0.72858318
+  H       1.14627218     0.98941003     1.95482520
+  H      -1.14676057     0.98295160    -1.95675717
+  H      -1.34650335     0.06810117    -0.72482129
+  H       0.72810518    -0.06186014    -1.34872142
+  H       1.95057642    -0.98833069    -1.14558354
+  H      -0.72703573    -0.06575415     1.35156867
+  H      -1.95270073    -0.98745311     1.14464678
+  H       1.56681459     2.89291882    -0.00316599
+  H       1.92433921     1.83983329    -1.06611724
+  H      -0.00511757    -2.89477284    -1.56679971
+  H      -1.07087869    -1.84139535    -1.91693517
+  H      -0.05748186     2.90789148     1.57927484
+  H       1.06103881     3.56065162     2.45452965
+  H       0.00532585    -2.89179177     1.56768173
+  H       1.07022772    -1.83898762     1.92167783
+end
+basis "ao basis" spherical noprint
+  * library cc-pvtz
+end
+
+dft
+  semidirect memsize 2000000000 filesize 0
+  xc b3lyp
+  grid fine
+  iterations 100
+  vectors input atomic
+  noprint "final vectors analysis" "final vector symmetries"
+end
+task dft energy
+================================================================================
+
+
+                                         
+                                         
+ 
+ 
+             Northwest Computational Chemistry Package (NWChem) 7.0.0
+             --------------------------------------------------------
+ 
+ 
+                    Environmental Molecular Sciences Laboratory
+                       Pacific Northwest National Laboratory
+                                Richland, WA 99352
+ 
+                              Copyright (c) 1994-2019
+                       Pacific Northwest National Laboratory
+                            Battelle Memorial Institute
+ 
+             NWChem is an open-source computational chemistry package
+                        distributed under the terms of the
+                      Educational Community License (ECL) 2.0
+             A copy of the license is included with this distribution
+                              in the LICENSE.TXT file
+ 
+                                  ACKNOWLEDGMENT
+                                  --------------
+
+            This software and its documentation were developed at the
+            EMSL at Pacific Northwest National Laboratory, a multiprogram
+            national laboratory, operated for the U.S. Department of Energy
+            by Battelle under Contract Number DE-AC05-76RL01830. Support
+            for this work was provided by the Department of Energy Office
+            of Biological and Environmental Research, Office of Basic
+            Energy Sciences, and the Office of Advanced Scientific Computing.
+
+
+           Job information
+           ---------------
+
+    hostname        = gadi-cpu-spr-0365.gadi.nci.org.au
+    program         = nwchem
+    date            = Tue Oct 28 19:26:32 2025
+
+    compiled        = Tue_Apr_28_15:46:55_2020
+    source          = /jobfs/4837200.gadi-pbs/0/nwchem/7.0.0/source/nwchem-7.0.0
+    nwchem branch   = 7.0.0
+    nwchem revision = 36492d0
+    ga revision     = N/A
+    use scalapack   = T
+    input           = /home/386/mj4785/scratch/mj4785/nwchem/input/w12_b3lyp_cc-pvtz_energy.nw
+    prefix          = w12_b3lyp_cc-pvtz_energy.
+    data base       = ./w12_b3lyp_cc-pvtz_energy.db
+    status          = startup
+    nproc           =       52
+    time left       =     -1s
+
+
+
+           Memory information
+           ------------------
+
+    heap     =   13107196 doubles =    100.0 Mbytes
+    stack    = 1048576001 doubles =   8000.0 Mbytes
+    global   = 1048576000 doubles =   8000.0 Mbytes (distinct from heap & stack)
+    total    = 2110259197 doubles =  16100.0 Mbytes
+    verify   = no 
+    hardfail = no 
+
+
+           Directory information
+           ---------------------
+ 
+  0 permanent = .
+  0 scratch   = /jobfs/153592689.gadi-pbs
+ 
+ 
+ 
+ 
+                                NWChem Input Module
+                                -------------------
+ 
+ 
+
+ Scaling coordinates for geometry "geometry" by  1.889725989
+ (inverse scale =  0.529177249)
+
+ C1  symmetry detected
+
+          ------
+          auto-z
+          ------
+  autoz: The atoms group into disjoint clusters
+ cluster   1:    1   13   14 
+ cluster   2:    2   35   36 
+ cluster   3:    3   25   26 
+ cluster   4:    4   21   22 
+ cluster   5:    5   23   24 
+ cluster   6:    6   27   28 
+ cluster   7:    7   15   16 
+ cluster   8:    8   31   32 
+ cluster   9:    9   17   18 
+ cluster  10:   10   29   30 
+ cluster  11:   11   33   34 
+ cluster  12:   12   19   20 
+ Connecting clusters   1   2 via atoms   13    2 r = 1.70
+ Connecting clusters   1   3 via atoms    1   26 r = 1.90
+ Clusters   1   4 closest atoms are   13   21 r = 3.06 ... close but too far?
+ Connecting clusters   1   5 via atoms    1    5 r = 4.14
+ Clusters   1   6 closest atoms are   13   27 r = 3.88 ... close but too far?
+ Clusters   1   7 closest atoms are   13   15 r = 3.16 ... close but too far?
+ Connecting clusters   1   8 via atoms    1   31 r = 1.92
+ Clusters   1  10 closest atoms are    1   30 r = 4.72 ... close but too far?
+ Clusters   2   3 closest atoms are   36   26 r = 3.30 ... close but too far?
+ Connecting clusters   2   4 via atoms   36    4 r = 1.93
+ Clusters   2   5 closest atoms are   35   24 r = 3.98 ... close but too far?
+ Connecting clusters   2   6 via atoms   36   27 r = 2.59
+ Connecting clusters   2   7 via atoms   35    7 r = 1.92
+ Clusters   2   8 closest atoms are   35   31 r = 3.13 ... close but too far?
+ Clusters   2  10 closest atoms are   36   30 r = 4.82 ... close but too far?
+ Clusters   2  11 closest atoms are   36   11 r = 4.72 ... close but too far?
+ Clusters   2  12 closest atoms are   36   20 r = 4.82 ... close but too far?
+ Connecting clusters   3   4 via atoms    3   21 r = 1.78
+ Connecting clusters   3   5 via atoms   25    5 r = 1.78
+ Clusters   3   6 closest atoms are   25   27 r = 3.07 ... close but too far?
+ Clusters   3   7 closest atoms are   25   15 r = 3.89 ... close but too far?
+ Connecting clusters   3   8 via atoms   25   32 r = 2.59
+ Clusters   3   9 closest atoms are   25   17 r = 3.05 ... close but too far?
+ Connecting clusters   3  10 via atoms    3   30 r = 1.93
+ Connecting clusters   3  11 via atoms    3   11 r = 4.14
+ Clusters   3  12 closest atoms are   25   19 r = 3.98 ... close but too far?
+ Clusters   4   5 closest atoms are   21   24 r = 3.06 ... close but too far?
+ Connecting clusters   4   6 via atoms    4   27 r = 1.78
+ Connecting clusters   4   7 via atoms    4    7 r = 4.14
+ Clusters   4   8 closest atoms are   21   31 r = 3.98 ... close but too far?
+ Clusters   4   9 closest atoms are   21   17 r = 3.88 ... close but too far?
+ Connecting clusters   4  10 via atoms   21   30 r = 2.59
+ Connecting clusters   4  11 via atoms   22   11 r = 1.91
+ Clusters   4  12 closest atoms are   22   20 r = 3.31 ... close but too far?
+ Connecting clusters   5   6 via atoms   24    6 r = 1.78
+ Clusters   5   7 closest atoms are   24   15 r = 3.06 ... close but too far?
+ Connecting clusters   5   8 via atoms    5   32 r = 1.93
+ Connecting clusters   5   9 via atoms   23    9 r = 1.91
+ Clusters   5  10 closest atoms are   23   30 r = 3.31 ... close but too far?
+ Clusters   5  11 closest atoms are   24   33 r = 3.88 ... close but too far?
+ Connecting clusters   5  12 via atoms   24   20 r = 2.58
+ Connecting clusters   6   7 via atoms   28    7 r = 1.91
+ Clusters   6   8 closest atoms are   28   32 r = 3.30 ... close but too far?
+ Connecting clusters   6   9 via atoms    6    9 r = 4.14
+ Clusters   6  10 closest atoms are   27   29 r = 3.98 ... close but too far?
+ Clusters   6  11 closest atoms are   27   33 r = 3.06 ... close but too far?
+ Connecting clusters   6  12 via atoms    6   20 r = 1.93
+ Connecting clusters   7   8 via atoms   15    8 r = 1.70
+ Clusters   7  12 closest atoms are    7   20 r = 4.72 ... close but too far?
+ Clusters   8   9 closest atoms are   32    9 r = 4.72 ... close but too far?
+ Clusters   8  10 closest atoms are   32   30 r = 4.82 ... close but too far?
+ Clusters   8  12 closest atoms are   32   20 r = 4.81 ... close but too far?
+ Connecting clusters   9  10 via atoms   17   10 r = 1.70
+ Clusters   9  11 closest atoms are   17   33 r = 3.16 ... close but too far?
+ Connecting clusters   9  12 via atoms    9   19 r = 1.92
+ Connecting clusters  10  11 via atoms   29   11 r = 1.92
+ Clusters  10  12 closest atoms are   29   19 r = 3.13 ... close but too far?
+ Connecting clusters  11  12 via atoms   33   12 r = 1.70
+  autoz: regenerating connections with new bonds
+  no constraints, skipping   0.000000000000000E+000
+  no constraints, skipping   0.000000000000000E+000
+ 
+ 
+                             Geometry "geometry" -> ""
+                             -------------------------
+ 
+ Output coordinates in angstroms (scale by  1.889725989 to convert to a.u.)
+ 
+  No.       Tag          Charge          X              Y              Z
+ ---- ---------------- ---------- -------------- -------------- --------------
+    1 O                    8.0000     1.72088875    -2.87151749    -1.05275191
+    2 O                    8.0000     1.09245301    -2.75932407     1.54640708
+    3 O                    8.0000     1.56854828    -0.06968553    -1.14653045
+    4 O                    8.0000     1.14924741     0.07154399     1.57031207
+    5 O                    8.0000    -1.14892563     0.06735857    -1.56686396
+    6 O                    8.0000    -1.56755270    -0.06991933     1.14999735
+    7 O                    8.0000    -1.71946358    -2.87262741     1.05268716
+    8 O                    8.0000    -1.09175034    -2.76247800    -1.54648939
+    9 O                    8.0000    -1.04953296     2.87009872    -1.72436059
+   10 O                    8.0000     1.54862648     2.76000628    -1.08941565
+   11 O                    8.0000     1.04770116     2.87559593     1.72063567
+   12 O                    8.0000    -1.55041304     2.76020982     1.08646986
+   13 H                    1.0000     1.58144990    -2.90517526    -0.07130872
+   14 H                    1.0000     2.36772904    -3.55271593    -1.25699879
+   15 H                    1.0000    -1.57911444    -2.90972428     0.07144631
+   16 H                    1.0000    -2.36530393    -3.55411005     1.25914275
+   17 H                    1.0000    -0.06853597     2.90425632    -1.58207206
+   18 H                    1.0000    -1.25268397     3.55429621    -2.36839268
+   19 H                    1.0000    -1.56236325     2.89090570     0.12238339
+   20 H                    1.0000    -1.83270877     1.83941355     1.21285980
+   21 H                    1.0000     1.40061214     0.06744603     0.62048119
+   22 H                    1.0000     1.29619112     0.98915389     1.85893566
+   23 H                    1.0000    -1.29707455     0.98320752    -1.86039968
+   24 H                    1.0000    -1.39932399     0.06809444    -0.61676484
+   25 H                    1.0000     0.61986579    -0.06151678    -1.40175876
+   26 H                    1.0000     1.85460547    -0.98789255    -1.29548328
+   27 H                    1.0000    -0.61862268    -0.06609844     1.40450961
+   28 H                    1.0000    -1.85666928    -0.98789175     1.29433678
+   29 H                    1.0000     1.56142037     2.89309145    -0.12565658
+   30 H                    1.0000     1.83442612     1.84025295    -1.21362593
+   31 H                    1.0000    -0.12795709    -2.89446745    -1.56213203
+   32 H                    1.0000    -1.21803221    -1.84113879    -1.82723713
+   33 H                    1.0000     0.06647129     2.90757627     1.57951191
+   34 H                    1.0000     1.25023910     3.56028840     2.36431502
+   35 H                    1.0000     0.12872090    -2.89209766     1.56184022
+   36 H                    1.0000     1.21804414    -1.83924558     1.83128998
+ 
+      Atomic Mass 
+      ----------- 
+ 
+      O                 15.994910
+      H                  1.007825
+ 
+
+ Effective nuclear repulsion energy (a.u.)    1015.5164477749
+
+            Nuclear Dipole moment (a.u.) 
+            ----------------------------
+        X                 Y               Z
+ ---------------- ---------------- ----------------
+     0.0000000000     0.0000000000    -0.0000000000
+ 
+
+
+                                Z-matrix (autoz)
+                                -------- 
+
+ Units are Angstrom for bonds and degrees for angles
+ 
+      Type          Name      I     J     K     L     M      Value
+      ----------- --------  ----- ----- ----- ----- ----- ----------
+    1 Stretch                  1    26                       1.90390
+    2 Stretch                  1     5                       4.13970
+    3 Stretch                  1    31                       1.91787
+    4 Stretch                  1    13                       0.99187
+    5 Stretch                  1    14                       0.96133
+    6 Stretch                  2    13                       1.69629
+    7 Stretch                  2    35                       0.97296
+    8 Stretch                  2    36                       0.97133
+    9 Stretch                  3    21                       1.78026
+   10 Stretch                  3    30                       1.92952
+   11 Stretch                  3    11                       4.14326
+   12 Stretch                  3    25                       0.98245
+   13 Stretch                  3    26                       0.97320
+   14 Stretch                  4    36                       1.92976
+   15 Stretch                  4    27                       1.78095
+   16 Stretch                  4     7                       4.14314
+   17 Stretch                  4    21                       0.98254
+   18 Stretch                  4    22                       0.97309
+   19 Stretch                  5    25                       1.78115
+   20 Stretch                  5    32                       1.92742
+   21 Stretch                  5    23                       0.97308
+   22 Stretch                  5    24                       0.98254
+   23 Stretch                  6    24                       1.78011
+   24 Stretch                  6     9                       4.14415
+   25 Stretch                  6    20                       1.92868
+   26 Stretch                  6    27                       0.98248
+   27 Stretch                  6    28                       0.97319
+   28 Stretch                  7    35                       1.91713
+   29 Stretch                  7    28                       1.90511
+   30 Stretch                  7    15                       0.99192
+   31 Stretch                  7    16                       0.96133
+   32 Stretch                  8    15                       1.69615
+   33 Stretch                  8    31                       0.97291
+   34 Stretch                  8    32                       0.97141
+   35 Stretch                  9    23                       1.90792
+   36 Stretch                  9    19                       1.91674
+   37 Stretch                  9    17                       0.99185
+   38 Stretch                  9    18                       0.96134
+   39 Stretch                 10    17                       1.69668
+   40 Stretch                 10    29                       0.97299
+   41 Stretch                 10    30                       0.97111
+   42 Stretch                 11    22                       1.90776
+   43 Stretch                 11    29                       1.91651
+   44 Stretch                 11    33                       0.99184
+   45 Stretch                 11    34                       0.96133
+   46 Stretch                 12    33                       1.69680
+   47 Stretch                 12    19                       0.97298
+   48 Stretch                 12    20                       0.97136
+   49 Stretch                 20    24                       2.58320
+   50 Stretch                 21    30                       2.58747
+   51 Stretch                 25    32                       2.59344
+   52 Stretch                 27    36                       2.58835
+   53 Bend                     1    26     3               153.28918
+   54 Bend                     1     5    25                41.29596
+   55 Bend                     1     5    32                48.59911
+   56 Bend                     1     5    23               144.21092
+   57 Bend                     1     5    24                93.27410
+   58 Bend                     1    31     8               161.63672
+   59 Bend                     1    13     2               168.89099
+   60 Bend                     2    35     7               161.67634
+   61 Bend                     2    36     4               153.33616
+   62 Bend                     2    36    27               120.58376
+   63 Bend                     3    21    30                48.19439
+   64 Bend                     3    21     4               169.72751
+   65 Bend                     3    30    21                43.45219
+   66 Bend                     3    30    10               153.18923
+   67 Bend                     3    11    22                48.00033
+   68 Bend                     3    11    29                46.06352
+   69 Bend                     3    11    33                92.79847
+   70 Bend                     3    11    34               160.59031
+   71 Bend                     3    25     5               169.61329
+   72 Bend                     3    25    32               136.15601
+   73 Bend                     4    36    27                43.45513
+   74 Bend                     4    27    36                48.18073
+   75 Bend                     4    27     6               169.47553
+   76 Bend                     4     7    35                46.09520
+   77 Bend                     4     7    28                48.01049
+   78 Bend                     4     7    15                92.99204
+   79 Bend                     4     7    16               160.40556
+   80 Bend                     4    21    30               136.49230
+   81 Bend                     4    22    11               153.03439
+   82 Bend                     5     1    26                47.97086
+   83 Bend                     5     1    31                46.14933
+   84 Bend                     5     1    13                92.83835
+   85 Bend                     5     1    14               160.58290
+   86 Bend                     5    25    32                47.98606
+   87 Bend                     5    32    25                43.36148
+   88 Bend                     5    32     8               153.56566
+   89 Bend                     5    23     9               152.81667
+   90 Bend                     5    24     6               169.65859
+   91 Bend                     5    24    20               136.73247
+   92 Bend                     6    24    20                48.26714
+   93 Bend                     6     9    23                48.05758
+   94 Bend                     6     9    19                46.05176
+   95 Bend                     6     9    17                92.78354
+   96 Bend                     6     9    18               160.58947
+   97 Bend                     6    20    24                43.53291
+   98 Bend                     6    20    12               153.41157
+   99 Bend                     6    27    36               136.50312
+  100 Bend                     6    28     7               153.24834
+  101 Bend                     7     4    36                48.54365
+  102 Bend                     7     4    27                41.07370
+  103 Bend                     7     4    21                93.06093
+  104 Bend                     7     4    22               144.26364
+  105 Bend                     7    15     8               168.82092
+  106 Bend                     8    32    25               120.74984
+  107 Bend                     9     6    24                40.95636
+  108 Bend                     9     6    20                48.50695
+  109 Bend                     9     6    27                93.22089
+  110 Bend                     9     6    28               144.01715
+  111 Bend                     9    19    12               161.79274
+  112 Bend                     9    17    10               168.94061
+  113 Bend                    10    29    11               161.70455
+  114 Bend                    10    30    21               120.59124
+  115 Bend                    11     3    21                41.10802
+  116 Bend                    11     3    30                48.52751
+  117 Bend                    11     3    25                93.00801
+  118 Bend                    11     3    26               144.44489
+  119 Bend                    11    33    12               168.88774
+  120 Bend                    12    20    24               120.60388
+  121 Bend                    13     2    35               106.79421
+  122 Bend                    13     2    36               108.89771
+  123 Bend                    13     1    26                99.76439
+  124 Bend                    13     1    31                97.28913
+  125 Bend                    13     1    14               106.30655
+  126 Bend                    14     1    26               128.80787
+  127 Bend                    14     1    31               125.71376
+  128 Bend                    15     8    31               106.75029
+  129 Bend                    15     8    32               108.70337
+  130 Bend                    15     7    35                97.23490
+  131 Bend                    15     7    28                99.94288
+  132 Bend                    15     7    16               106.31952
+  133 Bend                    16     7    35               125.69167
+  134 Bend                    16     7    28               128.73284
+  135 Bend                    17    10    29               106.76902
+  136 Bend                    17    10    30               108.89845
+  137 Bend                    17     9    23                99.93974
+  138 Bend                    17     9    19                97.24041
+  139 Bend                    17     9    18               106.29632
+  140 Bend                    18     9    23               128.95312
+  141 Bend                    18     9    19               125.53511
+  142 Bend                    19     9    23                92.56317
+  143 Bend                    19    12    33               106.73551
+  144 Bend                    19    12    20               104.63690
+  145 Bend                    20     6    24                88.19995
+  146 Bend                    20     6    27                96.92055
+  147 Bend                    20     6    28               152.63832
+  148 Bend                    20    12    33               108.75088
+  149 Bend                    21     3    30                88.35342
+  150 Bend                    21     3    25                99.56251
+  151 Bend                    21     3    26               104.61477
+  152 Bend                    21     4    36                96.74707
+  153 Bend                    21     4    27                99.41776
+  154 Bend                    21     4    22               104.59781
+  155 Bend                    22    11    29                92.51897
+  156 Bend                    22    11    33                99.84926
+  157 Bend                    22    11    34               128.92462
+  158 Bend                    22     4    36               152.65061
+  159 Bend                    22     4    27               104.50062
+  160 Bend                    23     5    25               104.31498
+  161 Bend                    23     5    32               152.34216
+  162 Bend                    23     5    24               104.60716
+  163 Bend                    24     6    27                99.52802
+  164 Bend                    24     6    28               104.38353
+  165 Bend                    24     5    25                99.41002
+  166 Bend                    24     5    32                97.02099
+  167 Bend                    25     5    32                88.65245
+  168 Bend                    25     3    30                96.64946
+  169 Bend                    25     3    26               104.59086
+  170 Bend                    26     1    31                92.61835
+  171 Bend                    26     3    30               152.63432
+  172 Bend                    27     4    36                88.36414
+  173 Bend                    27     6    28               104.60685
+  174 Bend                    28     7    35                92.62449
+  175 Bend                    29    11    33                97.34338
+  176 Bend                    29    11    34               125.59599
+  177 Bend                    29    10    30               104.61771
+  178 Bend                    31     8    32               104.64355
+  179 Bend                    33    11    34               106.30418
+  180 Bend                    35     2    36               104.63641
+  181 Torsion                  1    26     3    21          49.52102
+  182 Torsion                  1    26     3    30         165.57298
+  183 Torsion                  1    26     3    11          62.54558
+  184 Torsion                  1    26     3    25         -54.67719
+  185 Torsion                  1     5    25    32          12.68806
+  186 Torsion                  1     5    25     3        -105.31092
+  187 Torsion                  1     5    32    25         -11.14221
+  188 Torsion                  1     5    32     8          51.65433
+  189 Torsion                  1     5    23     9         -63.72221
+  190 Torsion                  1     5    24     6          19.47085
+  191 Torsion                  1     5    24    20         133.79218
+  192 Torsion                  1    31     8    15         -34.42464
+  193 Torsion                  1    31     8    32          80.71097
+  194 Torsion                  1    13     2    35          47.78250
+  195 Torsion                  1    13     2    36         -64.69357
+  196 Torsion                  2    13     1    26          54.72702
+  197 Torsion                  2    13     1     5           6.92173
+  198 Torsion                  2    13     1    31         -39.21484
+  199 Torsion                  2    13     1    14        -169.79995
+  200 Torsion                  2    35     7     4         -57.25330
+  201 Torsion                  2    35     7    28         -70.44385
+  202 Torsion                  2    35     7    15          29.92905
+  203 Torsion                  2    35     7    16         146.02973
+  204 Torsion                  2    36     4    27          63.04263
+  205 Torsion                  2    36     4     7          51.87342
+  206 Torsion                  2    36     4    21         -36.24910
+  207 Torsion                  2    36     4    22        -177.61501
+  208 Torsion                  2    36    27     4        -152.31360
+  209 Torsion                  2    36    27     6          14.52055
+  210 Torsion                  3    21    30    10         152.06790
+  211 Torsion                  3    21     4    36          69.84980
+  212 Torsion                  3    21     4    27         -19.60496
+  213 Torsion                  3    21     4     7          21.24832
+  214 Torsion                  3    21     4    22        -127.39180
+  215 Torsion                  3    30    21     4        -167.23392
+  216 Torsion                  3    30    10    17         -40.15385
+  217 Torsion                  3    30    10    29          73.70229
+  218 Torsion                  3    11    22     4         -39.44718
+  219 Torsion                  3    11    29    10          57.26641
+  220 Torsion                  3    11    33    12          -7.31636
+  221 Torsion                  3    25     5    32        -117.99898
+  222 Torsion                  3    25     5    23          86.72023
+  223 Torsion                  3    25     5    24         -21.10481
+  224 Torsion                  3    25    32     5         166.71409
+  225 Torsion                  3    25    32     8          14.14650
+  226 Torsion                  3    26     1     5          39.80294
+  227 Torsion                  3    26     1    31          52.68032
+  228 Torsion                  3    26     1    13         -45.17926
+  229 Torsion                  3    26     1    14        -165.44522
+  230 Torsion                  4    36    27     6         166.83415
+  231 Torsion                  4    36     2    13          40.46808
+  232 Torsion                  4    36     2    35         -73.42571
+  233 Torsion                  4    27     6    24          19.16879
+  234 Torsion                  4    27     6     9         -21.58347
+  235 Torsion                  4    27     6    20         -70.16014
+  236 Torsion                  4    27     6    28         126.86928
+  237 Torsion                  4     7    28     6          38.98035
+  238 Torsion                  4     7    15     8           5.64262
+  239 Torsion                  4    21     3    30         121.45269
+  240 Torsion                  4    21     3    11         108.54797
+  241 Torsion                  4    21     3    25          24.98562
+  242 Torsion                  4    21     3    26         -82.94920
+  243 Torsion                  4    21    30    10         -15.16602
+  244 Torsion                  4    22    11    29         -52.49287
+  245 Torsion                  4    22    11    33          45.40982
+  246 Torsion                  4    22    11    34         165.83866
+  247 Torsion                  5     1    31     8         -57.05534
+  248 Torsion                  5    25    32     8        -152.56759
+  249 Torsion                  5    25     3    21          16.29232
+  250 Torsion                  5    25     3    30         -73.15207
+  251 Torsion                  5    25     3    11         -24.56945
+  252 Torsion                  5    25     3    26         124.24638
+  253 Torsion                  5    32     8    15          40.68714
+  254 Torsion                  5    32     8    31         -73.07523
+  255 Torsion                  5    23     9     6         -39.19561
+  256 Torsion                  5    23     9    19         -52.23972
+  257 Torsion                  5    23     9    17          45.57248
+  258 Torsion                  5    23     9    18         166.10335
+  259 Torsion                  5    24     6     9         110.35248
+  260 Torsion                  5    24     6    20         123.18103
+  261 Torsion                  5    24     6    27          26.46412
+  262 Torsion                  5    24     6    28         -81.41629
+  263 Torsion                  5    24    20     6        -167.33779
+  264 Torsion                  5    24    20    12         -14.98165
+  265 Torsion                  6    24    20    12         152.35615
+  266 Torsion                  6    24     5    25         -21.65011
+  267 Torsion                  6    24     5    32          68.14321
+  268 Torsion                  6    24     5    23        -129.23914
+  269 Torsion                  6     9    19    12          57.23228
+  270 Torsion                  6     9    17    10          -6.85614
+  271 Torsion                  6    20    12    33         -40.34630
+  272 Torsion                  6    20    12    19          73.41660
+  273 Torsion                  6    27     4    36        -120.87087
+  274 Torsion                  6    27     4     7        -108.10556
+  275 Torsion                  6    27     4    21         -24.30165
+  276 Torsion                  6    27     4    22          83.56363
+  277 Torsion                  6    28     7    35          51.75978
+  278 Torsion                  6    28     7    15         -46.05826
+  279 Torsion                  6    28     7    16        -166.47688
+  280 Torsion                  7    35     2    13         -34.25004
+  281 Torsion                  7    35     2    36          81.12081
+  282 Torsion                  7     4    36    27         -11.16921
+  283 Torsion                  7     4    27    36          12.76531
+  284 Torsion                  7     4    21    30         133.78271
+  285 Torsion                  7     4    22    11         -63.04963
+  286 Torsion                  7    28     6    24          50.41833
+  287 Torsion                  7    28     6     9          63.57108
+  288 Torsion                  7    28     6    20         165.56879
+  289 Torsion                  7    28     6    27         -53.67057
+  290 Torsion                  7    15     8    31          49.08534
+  291 Torsion                  7    15     8    32         -63.28667
+  292 Torsion                  8    15     7    35         -40.46178
+  293 Torsion                  8    15     7    28          53.50139
+  294 Torsion                  8    15     7    16        -171.00070
+  295 Torsion                  8    31     1    26         -70.32640
+  296 Torsion                  8    31     1    13          29.86907
+  297 Torsion                  8    31     1    14         146.01026
+  298 Torsion                  8    32     5    25          62.79654
+  299 Torsion                  8    32     5    23        -177.99988
+  300 Torsion                  8    32     5    24         -36.51963
+  301 Torsion                  9    23     5    25         -50.11715
+  302 Torsion                  9    23     5    32        -165.87837
+  303 Torsion                  9    23     5    24          53.82109
+  304 Torsion                  9     6    24    20         -12.82854
+  305 Torsion                  9     6    20    24          11.20401
+  306 Torsion                  9     6    20    12         -51.95170
+  307 Torsion                  9     6    27    36        -133.25351
+  308 Torsion                  9    19    12    33          34.16390
+  309 Torsion                  9    19    12    20         -81.01598
+  310 Torsion                  9    17    10    29         -47.81293
+  311 Torsion                  9    17    10    30          64.62939
+  312 Torsion                 10    17     9    23         -54.72343
+  313 Torsion                 10    17     9    19          39.17748
+  314 Torsion                 10    17     9    18         169.53381
+  315 Torsion                 10    29    11    22          70.73721
+  316 Torsion                 10    29    11    33         -29.53398
+  317 Torsion                 10    29    11    34        -145.66051
+  318 Torsion                 10    30     3    21         -63.37883
+  319 Torsion                 10    30     3    11         -52.07741
+  320 Torsion                 10    30     3    25          36.05837
+  321 Torsion                 10    30     3    26         177.04344
+  322 Torsion                 11     3    21    30         -12.90472
+  323 Torsion                 11     3    30    21          11.30142
+  324 Torsion                 11     3    25    32        -133.29767
+  325 Torsion                 11    22     4    36        -165.73686
+  326 Torsion                 11    22     4    27         -49.89785
+  327 Torsion                 11    22     4    21          54.10741
+  328 Torsion                 11    29    10    17          34.09127
+  329 Torsion                 11    29    10    30         -81.26099
+  330 Torsion                 11    33    12    19         -47.33278
+  331 Torsion                 11    33    12    20          65.04639
+  332 Torsion                 12    33    11    22         -55.13648
+  333 Torsion                 12    33    11    29          38.72536
+  334 Torsion                 12    33    11    34         169.20406
+  335 Torsion                 12    19     9    23          70.71651
+  336 Torsion                 12    19     9    17         -29.64518
+  337 Torsion                 12    19     9    18        -145.64292
+  338 Torsion                 12    20     6    24         -63.15570
+  339 Torsion                 12    20     6    27          36.22609
+  340 Torsion                 12    20     6    28         178.15717
+  341 Torsion                 13     2    36    27          85.87573
+  342 Torsion                 13     1     5    25          97.20186
+  343 Torsion                 13     1     5    32         -99.82002
+  344 Torsion                 13     1     5    23         117.40605
+  345 Torsion                 13     1     5    24          -3.34407
+  346 Torsion                 14     1     5    25         -92.30110
+  347 Torsion                 14     1     5    32          70.67702
+  348 Torsion                 14     1     5    23         -72.09691
+  349 Torsion                 14     1     5    24         167.15297
+  350 Torsion                 15     8    32    25          85.96693
+  351 Torsion                 15     7     4    36         -99.71243
+  352 Torsion                 15     7     4    27          97.42727
+  353 Torsion                 15     7     4    21          -3.41163
+  354 Torsion                 15     7     4    22         117.01634
+  355 Torsion                 16     7     4    36          70.64166
+  356 Torsion                 16     7     4    27         -92.21863
+  357 Torsion                 16     7     4    21         166.94246
+  358 Torsion                 16     7     4    22         -72.62957
+  359 Torsion                 17    10    30    21         -85.73555
+  360 Torsion                 17     9     6    24         -97.27581
+  361 Torsion                 17     9     6    20          99.95852
+  362 Torsion                 17     9     6    27           3.56577
+  363 Torsion                 17     9     6    28        -116.92521
+  364 Torsion                 18     9     6    24          93.20187
+  365 Torsion                 18     9     6    20         -69.56380
+  366 Torsion                 18     9     6    27        -165.95654
+  367 Torsion                 18     9     6    28          73.55248
+  368 Torsion                 19     9     6    24         165.34742
+  369 Torsion                 19     9     6    20           2.58175
+  370 Torsion                 19     9     6    27         -93.81099
+  371 Torsion                 19     9     6    28         145.69803
+  372 Torsion                 19    12    20    24          27.85512
+  373 Torsion                 20    24     6    27         -96.71691
+  374 Torsion                 20    24     6    28         155.40268
+  375 Torsion                 20    24     5    25          92.67122
+  376 Torsion                 20    24     5    32        -177.53547
+  377 Torsion                 20    24     5    23         -14.91781
+  378 Torsion                 20     6     9    23        -159.16761
+  379 Torsion                 20     6    27    36         178.16982
+  380 Torsion                 21     3    11    22           3.55395
+  381 Torsion                 21     3    11    29         165.30415
+  382 Torsion                 21     3    11    33         -97.19118
+  383 Torsion                 21     3    11    34          92.90428
+  384 Torsion                 21     3    25    32         -92.43590
+  385 Torsion                 21    30     3    25          99.43720
+  386 Torsion                 21    30     3    26        -119.57773
+  387 Torsion                 21    30    10    29          28.12059
+  388 Torsion                 21     4    36    27         -99.29173
+  389 Torsion                 21     4    27    36          96.56922
+  390 Torsion                 21     4     7    35          93.75322
+  391 Torsion                 21     4     7    28        -104.10651
+  392 Torsion                 22    11     3    30        -159.11217
+  393 Torsion                 22    11     3    25         104.66992
+  394 Torsion                 22    11     3    26         -15.81716
+  395 Torsion                 22     4    36    27         119.34236
+  396 Torsion                 22     4    27    36        -155.56550
+  397 Torsion                 22     4     7    35        -145.81881
+  398 Torsion                 22     4     7    28          16.32146
+  399 Torsion                 22     4    21    30         -14.85741
+  400 Torsion                 23     9     6    24           3.59806
+  401 Torsion                 23     9     6    27         104.43965
+  402 Torsion                 23     9     6    28         -16.05133
+  403 Torsion                 23     5     1    26          16.80826
+  404 Torsion                 23     5     1    31        -145.20964
+  405 Torsion                 23     5    25    32        -155.28079
+  406 Torsion                 23     5    32    25         119.20358
+  407 Torsion                 24     6    27    36         -92.50125
+  408 Torsion                 24    20     6    27          99.38180
+  409 Torsion                 24    20     6    28        -118.68713
+  410 Torsion                 24    20    12    33         -85.90778
+  411 Torsion                 24     5     1    26        -103.94186
+  412 Torsion                 24     5     1    31          94.04024
+  413 Torsion                 24     5    25    32          96.89417
+  414 Torsion                 24     5    32    25         -99.31616
+  415 Torsion                 25     5     1    26          -3.39593
+  416 Torsion                 25     5     1    31        -165.41383
+  417 Torsion                 25    32     8    31         -27.79544
+  418 Torsion                 25     3    21    30         -96.46707
+  419 Torsion                 25     3    11    29         -93.57988
+  420 Torsion                 25     3    11    33           3.92479
+  421 Torsion                 25     3    11    34        -165.97975
+  422 Torsion                 26     1     5    32         159.58219
+  423 Torsion                 26     3    21    30         155.59811
+  424 Torsion                 26     3    11    29         145.93304
+  425 Torsion                 26     3    11    33        -116.56229
+  426 Torsion                 26     3    11    34          73.53317
+  427 Torsion                 26     3    25    32          15.51816
+  428 Torsion                 27    36     2    35         -28.01805
+  429 Torsion                 27     4     7    35        -165.40788
+  430 Torsion                 27     4     7    28          -3.26761
+  431 Torsion                 27     4    21    30          92.92942
+  432 Torsion                 28     7     4    36         159.59268
+  433 Torsion                 28     6    27    36          15.19924
+  434 Torsion                 29    11     3    30           2.63804
+  435 Torsion                 30     3    11    33         100.14271
+  436 Torsion                 30     3    11    34         -69.76184
+  437 Torsion                 30     3    25    32         178.11972
+  438 Torsion                 30    21     4    36        -177.61581
+  439 Torsion                 31     1     5    32          -2.43571
+  440 Torsion                 35     7     4    36          -2.54759
+ 
+ 
+            XYZ format geometry
+            -------------------
+    36
+ geometry
+ O                     1.72088875    -2.87151749    -1.05275191
+ O                     1.09245301    -2.75932407     1.54640708
+ O                     1.56854828    -0.06968553    -1.14653045
+ O                     1.14924741     0.07154399     1.57031207
+ O                    -1.14892563     0.06735857    -1.56686396
+ O                    -1.56755270    -0.06991933     1.14999735
+ O                    -1.71946358    -2.87262741     1.05268716
+ O                    -1.09175034    -2.76247800    -1.54648939
+ O                    -1.04953296     2.87009872    -1.72436059
+ O                     1.54862648     2.76000628    -1.08941565
+ O                     1.04770116     2.87559593     1.72063567
+ O                    -1.55041304     2.76020982     1.08646986
+ H                     1.58144990    -2.90517526    -0.07130872
+ H                     2.36772904    -3.55271593    -1.25699879
+ H                    -1.57911444    -2.90972428     0.07144631
+ H                    -2.36530393    -3.55411005     1.25914275
+ H                    -0.06853597     2.90425632    -1.58207206
+ H                    -1.25268397     3.55429621    -2.36839268
+ H                    -1.56236325     2.89090570     0.12238339
+ H                    -1.83270877     1.83941355     1.21285980
+ H                     1.40061214     0.06744603     0.62048119
+ H                     1.29619112     0.98915389     1.85893566
+ H                    -1.29707455     0.98320752    -1.86039968
+ H                    -1.39932399     0.06809444    -0.61676484
+ H                     0.61986579    -0.06151678    -1.40175876
+ H                     1.85460547    -0.98789255    -1.29548328
+ H                    -0.61862268    -0.06609844     1.40450961
+ H                    -1.85666928    -0.98789175     1.29433678
+ H                     1.56142037     2.89309145    -0.12565658
+ H                     1.83442612     1.84025295    -1.21362593
+ H                    -0.12795709    -2.89446745    -1.56213203
+ H                    -1.21803221    -1.84113879    -1.82723713
+ H                     0.06647129     2.90757627     1.57951191
+ H                     1.25023910     3.56028840     2.36431502
+ H                     0.12872090    -2.89209766     1.56184022
+ H                     1.21804414    -1.83924558     1.83128998
+ 
+ ==============================================================================
+                                internuclear distances
+ ------------------------------------------------------------------------------
+       center one      |      center two      | atomic units |  angstroms
+ ------------------------------------------------------------------------------
+   13 H                |   1 O                |     1.87436  |     0.99187
+   14 H                |   1 O                |     1.81665  |     0.96133
+   15 H                |   7 O                |     1.87446  |     0.99192
+   16 H                |   7 O                |     1.81665  |     0.96133
+   17 H                |   9 O                |     1.87433  |     0.99185
+   18 H                |   9 O                |     1.81667  |     0.96134
+   19 H                |  12 O                |     1.83866  |     0.97298
+   20 H                |  12 O                |     1.83560  |     0.97136
+   21 H                |   4 O                |     1.85673  |     0.98254
+   22 H                |   4 O                |     1.83887  |     0.97309
+   23 H                |   5 O                |     1.83886  |     0.97308
+   24 H                |   5 O                |     1.85673  |     0.98254
+   25 H                |   3 O                |     1.85656  |     0.98245
+   26 H                |   3 O                |     1.83908  |     0.97320
+   27 H                |   6 O                |     1.85661  |     0.98248
+   28 H                |   6 O                |     1.83906  |     0.97319
+   29 H                |  10 O                |     1.83868  |     0.97299
+   30 H                |  10 O                |     1.83513  |     0.97111
+   31 H                |   8 O                |     1.83854  |     0.97291
+   32 H                |   8 O                |     1.83569  |     0.97141
+   33 H                |  11 O                |     1.87431  |     0.99184
+   34 H                |  11 O                |     1.81664  |     0.96133
+   35 H                |   2 O                |     1.83862  |     0.97296
+   36 H                |   2 O                |     1.83554  |     0.97133
+ ------------------------------------------------------------------------------
+                         number of included internuclear distances:         24
+ ==============================================================================
+
+
+
+ ==============================================================================
+                                 internuclear angles
+ ------------------------------------------------------------------------------
+        center 1       |       center 2       |       center 3       |  degrees
+ ------------------------------------------------------------------------------
+   13 H                |   1 O                |  14 H                |   106.31
+   35 H                |   2 O                |  36 H                |   104.64
+   25 H                |   3 O                |  26 H                |   104.59
+   21 H                |   4 O                |  22 H                |   104.60
+   23 H                |   5 O                |  24 H                |   104.61
+   27 H                |   6 O                |  28 H                |   104.61
+   15 H                |   7 O                |  16 H                |   106.32
+   31 H                |   8 O                |  32 H                |   104.64
+   17 H                |   9 O                |  18 H                |   106.30
+   29 H                |  10 O                |  30 H                |   104.62
+   33 H                |  11 O                |  34 H                |   106.30
+   19 H                |  12 O                |  20 H                |   104.64
+ ------------------------------------------------------------------------------
+                            number of included internuclear angles:         12
+ ==============================================================================
+
+
+
+  library name resolved from: environment
+  library file name is: </apps/nwchem/7.0.0/data/basissets/>
+  
+ 
+                                 NWChem DFT Module
+                                 -----------------
+ 
+ 
+
+
+ Summary of "ao basis" -> "ao basis" (spherical)
+ ------------------------------------------------------------------------------
+       Tag                 Description            Shells   Functions and Types
+ ---------------- ------------------------------  ------  ---------------------
+ O                          cc-pvtz                 10       30   4s3p2d1f
+ H                          cc-pvtz                  6       14   3s2p1d
+
+
+  Caching 1-el integrals 
+ 
+            General Information
+            -------------------
+          SCF calculation type: DFT
+          Wavefunction type:  closed shell.
+          No. of atoms     :    36
+          No. of electrons :   120
+           Alpha electrons :    60
+            Beta electrons :    60
+          Charge           :     0
+          Spin multiplicity:     1
+          Use of symmetry is: off; symmetry adaption is: off
+          Maximum number of iterations: 100
+          AO basis - number of functions:   696
+                     number of shells:   264
+          Convergence on energy requested:  1.00D-06
+          Convergence on density requested:  1.00D-05
+          Convergence on gradient requested:  5.00D-04
+ 
+              XC Information
+              --------------
+                         B3LYP Method XC Potential
+                     Hartree-Fock (Exact) Exchange  0.200          
+                        Slater Exchange Functional  0.800 local    
+                    Becke 1988 Exchange Functional  0.720 non-local
+              Lee-Yang-Parr Correlation Functional  0.810          
+                  VWN I RPA Correlation Functional  0.190 local    
+ 
+             Grid Information
+             ----------------
+          Grid used for XC integration:  fine      
+          Radial quadrature: Mura-Knowles        
+          Angular quadrature: Lebedev. 
+          Tag              B.-S. Rad. Rad. Pts. Rad. Cut. Ang. Pts.
+          ---              ---------- --------- --------- ---------
+          O                   0.60       70          16.0       590
+          H                   0.35       60          17.0       590
+          Grid pruning is: on 
+          Number of quadrature shells:  2280
+          Spatial weights used:  Erf1
+ 
+          Convergence Information
+          -----------------------
+          Convergence aids based upon iterative change in 
+          total energy or number of iterations. 
+          Levelshifting, if invoked, occurs when the 
+          HOMO/LUMO gap drops below (HL_TOL):  1.00D-02
+          DIIS, if invoked, will attempt to extrapolate 
+          using up to (NFOCK): 10 stored Fock matrices.
+
+                    Damping( 0%)  Levelshifting(0.5)       DIIS
+                  --------------- ------------------- ---------------
+          dE  on:    start            ASAP                start   
+          dE off:    2 iters        100 iters           100 iters 
+
+ 
+      Screening Tolerance Information
+      -------------------------------
+          Density screening/tol_rho:  1.00D-10
+          AO Gaussian exp screening on grid/accAOfunc:  14
+          CD Gaussian exp screening on grid/accCDfunc:  20
+          XC Gaussian exp screening on grid/accXCfunc:  20
+          Schwarz screening/accCoul:  1.00D-08
+
+ 
+      Superposition of Atomic Density Guess
+      -------------------------------------
+ 
+ Sum of atomic energies:        -909.36345476
+
+ #quartets = 4.600D+06 #integrals = 5.205D+07 #direct = 95.8% #cached =  4.2%
+
+
+ Integral file          = /jobfs/153592689.gadi-pbs/w12_b3lyp_cc-pvtz_energy.aoints.00
+ Record size in doubles =  65536        No. of integs per rec  =  43688
+ Max. records in memory =      0        Max. records in file   =      0
+ No. of bits per label  =     16        No. of bits per value  =     32
+
+ 
+      Non-variational initial energy
+      ------------------------------
+
+ Total energy =    -912.161238
+ 1-e energy   =   -3272.037934
+ 2-e energy   =    1344.360248
+ HOMO         =      -0.472995
+ LUMO         =      -0.472781
+ 
+   Time after variat. SCF:      2.7
+
+------------------------------------------------------------
+EAF file 0: "/jobfs/153592689.gadi-pbs/w12_b3lyp_cc-pvtz_energy.aoints.00" size=524288 bytes
+------------------------------------------------------------
+               write      read    awrite     aread      wait
+               -----      ----    ------     -----      ----
+     calls:        1         0         0         0         0
+   data(b): 5.24e+05  0.00e+00  0.00e+00  0.00e+00
+   time(s): 0.00e+00  0.00e+00  0.00e+00  0.00e+00  0.00e+00
+rate(mb/s): 0.00e+00  0.00e+00
+------------------------------------------------------------
+
+
+ Parallel integral file used      52 records with       0 large values
+
+   Time prior to 1st pass:      2.7
+  int2e_file: Failed to allocate cache ... halving
+
+ Integral file          = /jobfs/153592689.gadi-pbs/w12_b3lyp_cc-pvtz_energy.aoints.00
+ Record size in doubles =  65536        No. of integs per rec  =  43688
+ Max. records in memory =  30516        Max. records in file   =      0
+ No. of bits per label  =      8        No. of bits per value  =     64
+
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+  int2e_file: Failed to allocate cache ... halving
+
+ Grid_pts file          = /jobfs/153592689.gadi-pbs/w12_b3lyp_cc-pvtz_energy.gridpts.00
+ Record size in doubles =  12289        No. of grid_pts per rec  =   3070
+ Max. records in memory =     11        Max. recs in file   =    165211
+
+ Grid integrated density:     119.999938636784
+ Requested integration accuracy:   0.10E-06
+
+           Memory utilization after 1st SCF pass: 
+           Heap Space remaining (MW):        0.26              264560
+          Stack Space remaining (MW):     1048.57          1048570932
+
+   convergence    iter        energy       DeltaE   RMS-Dens  Diis-err    time
+ ---------------- ----- ----------------- --------- --------- ---------  ------
+ d= 0,ls=0.0,diis     1   -892.6048470774 -1.91D+03  3.33D+00  1.18D+02    26.3
+ d= 0,ls=0.0,diis     2   -915.0086785492 -2.24D+01  5.75D-03  3.41D+01    31.8
+ Grid integrated density:     120.000029053360
+ Requested integration accuracy:   0.10E-06
+ d= 0,ls=0.0,diis     3   -916.0968938105 -1.09D+00  3.01D-03  2.01D+01    37.1
+ Grid integrated density:     120.000015862901
+ Requested integration accuracy:   0.10E-06
+ d= 0,ls=0.0,diis     4   -917.7314276220 -1.63D+00  2.87D-04  7.55D-02    42.3
+ Grid integrated density:     120.000016460930
+ Requested integration accuracy:   0.10E-06
+ d= 0,ls=0.0,diis     5   -917.7348225721 -3.39D-03  1.28D-04  4.23D-02    47.5
+ Grid integrated density:     120.000016305476
+ Requested integration accuracy:   0.10E-06
+  Resetting Diis
+ d= 0,ls=0.0,diis     6   -917.7381202516 -3.30D-03  2.86D-05  1.55D-03    52.8
+ Grid integrated density:     120.000016200949
+ Requested integration accuracy:   0.10E-06
+ d= 0,ls=0.0,diis     7   -917.7382425534 -1.22D-04  1.30D-05  6.30D-05    58.1
+ Grid integrated density:     120.000016204779
+ Requested integration accuracy:   0.10E-06
+ d= 0,ls=0.0,diis     8   -917.7382360753  6.48D-06  7.13D-06  1.48D-04    63.4
+ Grid integrated density:     120.000016206721
+ Requested integration accuracy:   0.10E-06
+ d= 0,ls=0.0,diis     9   -917.7382480800 -1.20D-05  1.23D-06  1.97D-06    68.7
+ Grid integrated density:     120.000016203670
+ Requested integration accuracy:   0.10E-06
+ d= 0,ls=0.0,diis    10   -917.7382482563 -1.76D-07  1.93D-07  7.12D-08    74.1
+
+
+         Total DFT energy =     -917.738248256267
+      One electron energy =    -3287.429909343356
+           Coulomb energy =     1466.410616879368
+    Exchange-Corr. energy =     -112.235403567135
+ Nuclear repulsion energy =     1015.516447774856
+
+ Numeric. integr. density =      120.000016203670
+
+     Total iterative time =     71.4s
+
+
+
+ center of mass
+ --------------
+ x =  -0.00001201 y =  -0.00005122 z =   0.00000674
+
+ moments of inertia (a.u.)
+ ------------------
+        5595.849780825885           0.000000000000          -0.000000000000
+           0.000000000000        2963.437580704363           0.000000000000
+          -0.000000000000           0.000000000000        5596.035832731261
+ 
+     Multipole analysis of the density
+     ---------------------------------
+ 
+     L   x y z        total         alpha         beta         nuclear
+     -   - - -        -----         -----         ----         -------
+     0   0 0 0     -0.000000    -60.000000    -60.000000    120.000000
+ 
+     1   1 0 0      0.000722      0.000361      0.000361      0.000000
+     1   0 1 0      0.002021      0.001010      0.001010      0.000000
+     1   0 0 1     -0.000859     -0.000430     -0.000430     -0.000000
+ 
+     2   2 0 0    -58.379817   -443.040144   -443.040144    827.700471
+     2   1 1 0      0.002370     -0.002963     -0.002963      0.008296
+     2   1 0 1     -0.016403      0.002465      0.002465     -0.021332
+     2   0 2 0    -49.627757  -1173.490174  -1173.490174   2297.352592
+     2   0 1 1     -0.025183      0.005325      0.005325     -0.035834
+     2   0 0 2    -58.343709   -442.990393   -442.990393    827.637076
+ 
+
+ Parallel integral file used  139593 records with       0 large values
+
+
+ Task  times  cpu:      269.9s     wall:       73.7s
+ 
+ 
+                                NWChem Input Module
+                                -------------------
+ 
+ 
+ Summary of allocated global arrays
+-----------------------------------
+  No active global arrays
+
+
+
+                         GA Statistics for process    0
+                         ------------------------------
+
+       create   destroy   get      put      acc     scatter   gather  read&inc
+calls:  182      182     3.55e+04 3178     2.79e+04    0        0      548     
+number of processes/call 1.41e+14 1.37e+14 2.00e+00 0.00e+00 0.00e+00
+bytes total:             3.20e+08 2.07e+07 2.74e+08 0.00e+00 0.00e+00 4.38e+03
+bytes remote:            2.85e+08 8.46e+06 2.60e+08 0.00e+00 0.00e+00 0.00e+00
+Max memory consumed for GA by this process: 4147200 bytes
+ 
+MA_summarize_allocated_blocks: starting scan ...
+MA_summarize_allocated_blocks: scan completed: 0 heap blocks, 0 stack blocks
+MA usage statistics:
+
+	allocation statistics:
+					      heap	     stack
+					      ----	     -----
+	current number of blocks	         0	         0
+	maximum number of blocks	        21	        54
+	current total bytes		         0	         0
+	maximum total bytes		8003027016	  42601320
+	maximum total K-bytes		   8003028	     42602
+	maximum total M-bytes		      8004	        43
+ 
+ 
+                                     CITATION
+                                     --------
+                Please cite the following reference when publishing
+                           results obtained with NWChem:
+ 
+                 M. Valiev, E.J. Bylaska, N. Govind, K. Kowalski,
+              T.P. Straatsma, H.J.J. van Dam, D. Wang, J. Nieplocha,
+                        E. Apra, T.L. Windus, W.A. de Jong
+                 "NWChem: a comprehensive and scalable open-source
+                  solution for large scale molecular simulations"
+                      Comput. Phys. Commun. 181, 1477 (2010)
+                           doi:10.1016/j.cpc.2010.04.018
+ 
+                                      AUTHORS
+                                      -------
+     E. Apra, E. J. Bylaska, N. Govind, K. Kowalski, M. Valiev, W. A. de Jong,
+      T. P. Straatsma, H. J. J. van Dam, D. Wang, T. L. Windus, N. P. Bauman,
+       A. Panyala, J. Hammond, J. Autschbach, K. Bhaskaran-Nair, J. Brabec,
+    K. Lopata, S. A. Fischer, S. Krishnamoorthy, M. Jacquelin, W. Ma, M. Klemm,
+       O. Villa, Y. Chen, V. Anisimov, F. Aquino, S. Hirata, M. T. Hackler,
+           Eric Hermes, L. Jensen, J. E. Moore, J. C. Becca, V. Konjkov,
+            D. Mejia-Rodriguez, T. Risthaus, M. Malagoli, A. Marenich,
+   A. Otero-de-la-Roza, J. Mullin, P. Nichols, R. Peverati, J. Pittner, Y. Zhao,
+        P.-D. Fan, A. Fonari, M. J. Williamson, R. J. Harrison, J. R. Rehr,
+      M. Dupuis, D. Silverstein, D. M. A. Smith, J. Nieplocha, V. Tipparaju,
+      M. Krishnan, B. E. Van Kuiken, A. Vazquez-Mayagoitia, M. Swart, Q. Wu,
+   T. Van Voorhis, A. A. Auer, M. Nooijen, L. D. Crosby, E. Brown, G. Cisneros,
+     G. I. Fann, H. Fruchtl, J. Garza, K. Hirao, R. A. Kendall, J. A. Nichols,
+       K. Tsemekhman, K. Wolinski, J. Anchell, D. E. Bernholdt, P. Borowski,
+       T. Clark, D. Clerc, H. Dachsel, M. J. O. Deegan, K. Dyall, D. Elwood,
+      E. Glendening, M. Gutowski, A. C. Hess, J. Jaffe, B. G. Johnson, J. Ju,
+        R. Kobayashi, R. Kutteh, Z. Lin, R. Littlefield, X. Long, B. Meng,
+      T. Nakajima, S. Niu, L. Pollack, M. Rosing, K. Glaesemann, G. Sandrone,
+      M. Stave, H. Taylor, G. Thomas, J. H. van Lenthe, A. T. Wong, Z. Zhang.
+
+ Total times  cpu:      270.9s     wall:       74.5s

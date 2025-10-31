@@ -1,0 +1,25 @@
+
+#!/bin/bash
+#PBS -P ph60
+#PBS -q normalsr
+#PBS -l walltime=00:05:00
+#PBS -j oe
+#PBS -N w12baseline
+
+module purge
+module load nwchem/7.0.0
+export OMP_NUM_THREADS=1
+
+cd "$PBS_O_WORKDIR"
+
+INPUT="$HOME/w12_b3lyp_cc-pvtz_energy.nw"   # <- official input, unmodified (baseline!)
+NP=${NCPUS:-${PBS_NCPUS:-104}}              # total ranks from PBS
+NODES=$(( (NP + 103) / 104 ))               # 104 cores/node on Gadi
+OUT="$HOME/nwchem_baseline.w12.n${NODES}.${PBS_JOBID}.stdout"
+
+echo "BASELINE: NODES=${NODES} NP=${NP} INPUT=${INPUT}" | tee "$OUT"
+
+time mpirun -np "${NP}" \
+  nwchem "${INPUT}" 2>&1 | tee -a "$OUT"
+
+

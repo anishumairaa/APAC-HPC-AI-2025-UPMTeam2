@@ -1,0 +1,40 @@
+#!/bin/bash
+#PBS -P ph60
+#PBS -q normalsr
+#PBS -l walltime=00:05:00
+#PBS -l ncpus=208
+#PBS -l mem=1024gb
+#PBS -j oe
+#PBS -m abe
+##PBS -l other=hyperthread
+
+# Load required modules
+module purge
+module load nwchem/7.0.0
+
+# Display environment
+env
+env | grep -E "(PBS|OMP)" | sort
+module list
+
+# Set OpenMP parameters
+export OMP_NUM_THREADS=4
+export OMP_PLACES=cores
+export OMP_PROC_BIND=close
+
+export UCX_LOG_LEVEL=error
+export UCX_MEMTYPE_CACHE=n
+
+# Create and move to scratch directory
+mkdir -p /scratch/${USER}/${PBS_JOBID}
+cd /scratch/${USER}/${PBS_JOBID}
+
+# Set output file location
+OUTPUT_FILE=${HOME}/run/run11b.${PBS_JOBNAME}.stdout
+mkdir -p ${HOME}/run
+
+# Run NWChem
+time mpirun -np 52 --map-by ppr:26:node:PE=4 --bind-to core \
+    nwchem \
+    ${HOME}/scratch/${USER}/nwchem/input/w12_b3lyp_cc-pvtz_energy.nw \
+    2>&1 | tee ${OUTPUT_FILE}
