@@ -1,0 +1,8 @@
+cd $HOME/run
+nodes=32 walltime=00:10:00 \
+warmup_steps=10000 benchmark_steps=8000 repeat=1 N=200000 \
+bash -c \
+'qsub -V \
+-l walltime=${walltime},ncpus=$((96*nodes)),mem=$((48*nodes*1))gb \
+-N hoomd.nodes${nodes}.WS${warmup_steps}.BS${benchmark_steps} \
+hoomd.sh'
