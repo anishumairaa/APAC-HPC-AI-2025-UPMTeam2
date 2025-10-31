@@ -1,5 +1,5 @@
 
-# APAC HPC AI Competition 2024 - UPM Team3
+# APAC HPC-AI Competition 2025 - UPM Team 2
 
 Welcome to our project submission for the APAC HPC-AI Competition 2025. This README file provides an overview of our project, the methodologies used, and the results obtained.
 
