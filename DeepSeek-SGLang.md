@@ -145,7 +145,7 @@ COMMON_FLAGS="\
 
 
 ## Submit jobs
-To submit jobs, we run command in [submit_job_llama.txt ](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/submit_job_llama.txt)  
+To submit jobs, we run command in [submit_job_sglang.txt ](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/submit_job_llama.txt)  
 
 # Reference Results
 ## Performance metrics
