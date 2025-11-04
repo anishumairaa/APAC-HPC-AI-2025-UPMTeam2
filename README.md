@@ -69,6 +69,34 @@ export NVIDIA_TF32_OVERRIDE=0
 > Disable TF32 to only adhere to bfloat16 for more math accuracy
 
 * Warm up execution
+```
+  COMMON_FLAGS="\
+  --model-path deepseek-ai/DeepSeek-R1 \
+  --dataset-path ${HOME}/scratch/ShareGPT_V3_unfiltered_cleaned_split.json \
+  --seed 2025 \
+  --dtype bfloat16 \
+  --trust-remote-code \
+  --tp 16 --nnodes 2 \
+  --dist-init-addr ${DIST_INIT_ADDR}:${DIST_INIT_PORT} \
+  --node-rank \${OMPI_COMM_WORLD_RANK} \
+  \
+"
+
+#-------- OPTIMIZATION: WARM UP ---------
+/usr/mpi/gcc/openmpi-4.1.7a1/bin/mpirun \
+  -hostfile ${PBS_NODEFILE} \
+  -map-by ppr:1:node \
+  -bind-to none \
+  -x PATH \
+  -x NCCL_DEBUG=INFO \
+  -x DIST_INIT_ADDR=$(HEAD -N 1 $PBS_NODEFILE) \
+  bash -c "time ${PYTHON} -m sglang.bench_offline_throughput \
+    ${COMMON_FLAGS} \
+    --num-prompts 64 \
+    --load-format dummy \
+  " || true
+ ```
+> urm jap
   
 # Results
 ### NWChem
