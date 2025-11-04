@@ -440,6 +440,7 @@ grep "Total times:" ./run.script.pbs.stdout
 * Performance scaling across different nodes shows 4 nodes increased by 31.6% CPU Time and 81.3% Wall Time from the baseline.  
 <img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/images/nwchem-graph-diff-nodes.png?raw=true" alt="NWChem Graph" width="600">
 <img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/images/nwchem-graph-analysis-4nodes.png?raw=true" alt="NWChem Graph" width="600">
+
 ##Graph 1 – Performance Scaling Across Nodes
 
 *Shows how NWChem execution time improves when the number of nodes increases (1 → 2 → 4).
