@@ -104,54 +104,44 @@ time /usr/mpi/gcc/openmpi-4.1.7a1/bin/mpirun \
 ```
 ## Diff of baseline vs finetuned script
 ```
-diff tuningllama.sh llama.sh
-13c13
-< env
----
-> #env
-15,19c15,16
-<
-< export NCCL_DEBUG=INFO
-< export NCCL_IB_DISABLE=1
-< export NCCL_NET_GDR_LEVEL=0
-< export NCCL_SHM_DISABLE=1
----
-> #hosts=$(sort -u ${PBS_NODEFILE} | paste -sd ',')
-> #-host ${hosts} -np 8 \
-28,29c25,28
-< -x mpirun -mca btl ^ucx \
-< -mca coll_hcoll_enable 1 -mca coll_basic_priority 10 \
----
-> -x NCCL_DEBUG=INFO \
-> -x NCCL_IB_DISABLE=1 \
-> -mca pml ^ucx \
-> -x NCCL_NET_GDR_LEVEL=0 \
-32a32
-> --out_dir ${HOME}/scratch/workdir/llama/out/finetune/full \
-34d33
-< --out_dir ${HOME}/scratch/workdir/llama/out/finetune/full
-45a45,48
->
-> #EleutherAI/pythia-70m \
-> #--train.max_steps=1 \
-> #--devices=4 --num_nodes=2"
+We added and modified few lines in `sglang-warmup.sh`, that are:
 ```
-We added and modified few lines in `tuningllama.sh`, that are:
+export CUDA_DEVICE_MAX_CONNECTIONS=1
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export NVIDIA_TF32_OVERRIDE=0                # keep math stable
+export NCCL_IB_HCA=mlx5
+export NCCL_SOCKET_IFNAME="ib0,bond0,eno1,eth0"
+export NCCL_NET_GDR_LEVEL=PHB
+export DIST_INIT_PORT=5000
 ```
--x mpirun -mca btl ^ucx \
--mca coll_hcoll_enable 1 -mca coll_basic_priority 10 \
+Warm up to ensure that the gpu is fully activated
 ```
-```
-export NCCL_DEBUG=INFO
-export NCCL_IB_DISABLE=1
-export NCCL_NET_GDR_LEVEL=0
-export NCCL_SHM_DISABLE=1
-```
-and deleted:
-```
--x NCCL_DEBUG=INFO \
--x NCCL_NET_GDR_LEVEL=0 \
--x NCCL_IB_DISABLE=1 \
+COMMON_FLAGS="\
+  --model-path deepseek-ai/DeepSeek-R1 \
+  --dataset-path ${HOME}/scratch/ShareGPT_V3_unfiltered_cleaned_split.json \
+  --seed 2025 \
+  --dtype bfloat16 \
+  --trust-remote-code \
+  --tp 16 --nnodes 2 \
+  --dist-init-addr ${DIST_INIT_ADDR}:${DIST_INIT_PORT} \
+  --node-rank \${OMPI_COMM_WORLD_RANK} \
+  \
+"
+
+#-------- OPTIMIZATION: WARM UP ---------
+/usr/mpi/gcc/openmpi-4.1.7a1/bin/mpirun \
+  -hostfile ${PBS_NODEFILE} \
+  -map-by ppr:1:node \
+  -bind-to none \
+  -x PATH \
+  -x NCCL_DEBUG=INFO \
+  -x DIST_INIT_ADDR=$(HEAD -N 1 $PBS_NODEFILE) \
+  bash -c "time ${PYTHON} -m sglang.bench_offline_throughput \
+    ${COMMON_FLAGS} \
+    --num-prompts 64 \
+    --load-format dummy \
+  " || true
+
 ```
 ## Submit jobs
 To submit jobs, we run command in [submit_job_llama.txt ](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/submit_job_llama.txt)  
