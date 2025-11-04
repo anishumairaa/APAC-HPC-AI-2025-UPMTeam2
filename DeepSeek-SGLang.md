@@ -296,7 +296,13 @@ paste the results
 - `mpirun` command is using export which makes these variables available globally to all processes
 - disables shared memory communication `NCCL_SHM_DISABLE=1` that will reduce conflicts or contention during processes' communication
 - enables High-Performance Collectives (HCOLL) `coll_hcoll_enable 1`
-- lowers the priority of the basic collective module `coll_basic_priority 10` to ensure HCOLL is used preferentially if available  
+- lowers the priority of the basic collective module `coll_basic_priority 10` to ensure HCOLL is used preferentially if available
+
+<img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/353845245e1578d8ed5df2f678d8e0a3406b77ba/images/deepseek-graph.png" alt="Sample Image" width="600" height="500">
+
+<img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/353845245e1578d8ed5df2f678d8e0a3406b77ba/images/deepseek-req-graph.png" alt="Sample Image" width="600" height="500">
+
+<img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/353845245e1578d8ed5df2f678d8e0a3406b77ba/images/deepseek-improvement-graph.png" alt="Sample Image" width="600" height="500">
 
 Although our script has improved slightly in the training speed, but our script is focused on improving inter-node communication performance and stability where shared memory access might cause bottlenecks or instability. In HPC environments where data transfer between GPUs needs efficiency, which can increase training speed. Thus, it is important to concentrated on communication settings in this job.
 
