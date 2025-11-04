@@ -125,7 +125,7 @@ task dft energy
 # Modifications to the code 
 The implementation of fast storage, application of OpenMP and MPI and adjustment in the input, allowing for a comparative analysis of the results to identify the most efficient configuration
 ## Creation of Shell script of input file
-Creation of Shell script of input file which allows modifications and execution of the input file, 'input.sh':
+Creation of Shell script of input file which allows modifications and execution of the input file, `input.sh`:
 ```
 
 #!/bin/bash
@@ -201,7 +201,7 @@ echo "Input file created at: ${HOME}/scratch/${USER}/nwchem/input/w12_b3lyp_cc-p
 - Implementation of Hybrid Parallelization where threads would share memory efficiently within a node (OpenMP + MPI)
 - Adjustments in the input file such changing the memory directives and removal of SCF energy block
 ## Optimized PBS Script
-From the baseline script, we created an optimized version 'script.pbs'
+From the baseline script, we created an optimized version `script.pbs`
 ```
 #!/bin/bash
 #PBS -P ph60
@@ -386,9 +386,21 @@ mkdir -p ${SCRATCH_DIR}
 cd ${SCRATCH_DIR}
 ```
 ## Steps in optimzing and runnning
-**1.Adjust and run 'input.sh'**
--Configure the input by editing the 'input.sh' file and run the script by './input.sh'
-
+**1. Adjust and run `input.sh`**
+- Configure the input by editing the `input.sh` file and run the script by
+```
+./input.sh
+```
+**2. Execute the optimized script `script.pbs`**
+To submit jobs, we run command like
+```
+qsub script.pbs
+```
+**3. Read Result**
+To read result from a command that is ran, we run command like
+```
+grep "Total times:" ./run.script.pbs.stdout
+```
 # Performance Results
 ## Table 1: Node and MPI Process Scaling
 | Feature | Baseline (1 node) | Optimized (1 node) | Optimized (2 nodes) | Optimized (4 nodes) | Impact |
