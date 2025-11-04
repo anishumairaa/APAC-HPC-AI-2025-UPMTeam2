@@ -250,8 +250,8 @@ time mpirun -np 104 --map-by ppr:26:node:PE=4 --bind-to core \
 ## PBS Script Changes
 | Feature          | Baseline             | Optimized            |
 |------------------|----------------------|----------------------|
-| Resources        | ncpus=04,mem=208gb   | ncpus=416+mem2048gb  |      
-| Nodes            | 1 node               | 4 node               |
+| **Resources**        | ncpus=04,mem=208gb   | ncpus=416+mem2048gb  |      
+| **Nodes**            | 1 node               | 4 node               |
 ## Key Script Modification
 ### Added in optimized version
 ```
@@ -332,24 +332,17 @@ end
 ```
 # Performance Results
 ## Table 1 Node: Node and MPI Process Scaling
-| Number of nodes | Number of cores used | Total Cores | Memory requested (GB) | Walltime Used | Memory Used (GB) | Steps per second |
-| Script           | Configuration | No. of   | Number of       | mpirun   | Average CPU      | Average Wall        |
-|                  |               | nodes    | CPUs            | -np      | Time (s)         | Time (s)            |
-+------------------+---------------+----------+-----------------+----------+------------------+---------------------+
-| baseline.pbs     | Baseline      | 1        | 104 x 1 = 104   | 104      | 238.5            | 241.8               |
-+------------------+---------------+----------+-----------------+----------+------------------+---------------------+
-| script8a.pbs     |               |          |                 |          |                  |                     |
-| script8b.pbs     | Optimized     | 1        | 104 x 1 = 104   | 26       | 523.6            | 149.6               |
-| script8c.pbs     |               |          |                 |          |                  |                     |
-+------------------+---------------+----------+-----------------+----------+------------------+---------------------+
-| script10a.pbs    |               |          |                 |          |                  |                     |
-| script10b.pbs    | Optimized     | 2        | 104 x 2 = 208   | 52       | 271.9            | 75.3                |
-| script10c.pbs    |               |          |                 |          |                  |                     |
-+------------------+---------------+----------+-----------------+----------+------------------+---------------------+
-| script6a.pbs     |               |          |                 |          |                  |                     |
-| script6b.pbs     | Optimized     | 4        | 104 x 4 = 416   | 104      | 162.4            | 45.0                |
-| script6c.pbs     |               |          |                 |          |                  |                     |
-+------------------+---------------+----------+-----------------+----------+------------------+---------------------+
+| Feature | Baseline (1 node) | Optimized (1 node) | Optimized (2 nodes) | Optimized (4 nodes) | Impact |
+|---------|-------------------|-------------------|---------------------|---------------------|--------|
+| **Nodes** | 1 | 1 | 2 | 4 | More parallel resources |
+| **Total CPUs** | 104 | 104 | 208 | 416 | Linear scaling |
+| **MPI Processes** | 104 | 26 | 52 | 104 | Reduced per-node count |
+| **OpenMP Threads** | 1 (pure MPI) | 4 | 4 | 4 | Hybrid parallelization |
+| **Total Parallelism** | 104 | 104 (26×4) | 208 (52×4) | 416 (104×4) | Same total threads |
+| **MPI Mapping** | Default | `ppr:26:node:PE=4` | `ppr:26:node:PE=4` | `ppr:26:node:PE=4` | Controlled placement |
+| **Thread Binding** | None | `--bind-to core` | `--bind-to core` | `--bind-to core` | Better cache locality |
+| **Wall Time (s)** | 241.8 | 149.6 | 75.3 | 45.0 | Progressive improvement |
+| **Speedup vs Baseline** | 1.00× | 1.62× | 3.21× | 5.37× | Up to 5.37× faster |
 
 ## Result Analysis 
 The steps per second increases substantially with a higher number of nodes:
