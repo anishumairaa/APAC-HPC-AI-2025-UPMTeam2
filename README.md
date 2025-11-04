@@ -39,64 +39,9 @@ Performance metric:
 
 ### DeepSeek-SGLang
 * NCCL communication tuning
-```
-export NCCL_IB_HCA=mlx5
-```
-> Specifies mlx5 RDMA interface to use for communication
-```
-export NCCL_NET_GDR_LEVEL=PHB
-```
-> Control when to use GPU Direct RDMA between a NIC and a GPU
-
-```
-export NCCL_SOCKET_IFNAME="ib0,bond0,eno1,eth0"
-```
-> Specifies the network interfaces NCCL should use: InfiniBand
-
->
 * CUDA efficiency settings
- ```
-export CUDA DEVICE MAX CONNECTIONS=1
-```
-> Limits how many concurrent connections each CUDA device (GPU) can have 
- ```
-export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,,6,7
-```
-> Makes only GPUs 0–7 visible to the program. 
- ```
-export NVIDIA_TF32_OVERRIDE=0
-```
-> Disable TF32 to only adhere to bfloat16 for more math accuracy
-
 * Warm up execution
-```
-  COMMON_FLAGS="\
-  --model-path deepseek-ai/DeepSeek-R1 \
-  --dataset-path ${HOME}/scratch/ShareGPT_V3_unfiltered_cleaned_split.json \
-  --seed 2025 \
-  --dtype bfloat16 \
-  --trust-remote-code \
-  --tp 16 --nnodes 2 \
-  --dist-init-addr ${DIST_INIT_ADDR}:${DIST_INIT_PORT} \
-  --node-rank \${OMPI_COMM_WORLD_RANK} \
-  \
-"
 
-#-------- OPTIMIZATION: WARM UP ---------
-/usr/mpi/gcc/openmpi-4.1.7a1/bin/mpirun \
-  -hostfile ${PBS_NODEFILE} \
-  -map-by ppr:1:node \
-  -bind-to none \
-  -x PATH \
-  -x NCCL_DEBUG=INFO \
-  -x DIST_INIT_ADDR=$(HEAD -N 1 $PBS_NODEFILE) \
-  bash -c "time ${PYTHON} -m sglang.bench_offline_throughput \
-    ${COMMON_FLAGS} \
-    --num-prompts 64 \
-    --load-format dummy \
-  " || true
- ```
-> urm jap
   
 # Results
 ### NWChem
