@@ -47,6 +47,7 @@ Performance metric:
 ### NWChem
 * Performance scaling across different nodes shows 4 nodes increased by 31.6% CPU Time and 81.3% Wall Time from the baseline.  
 <img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/images/nwchem-graph-diff-nodes.png?raw=true" alt="NWChem Graph" width="600">
+
 * Comparative performance of configurations on different memory directives shows 16000/200/16000 increased by 47.4% CPU Time and 84.8% Wall Time from the baseline.  
 <img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/images/nwchem-graph-diff-conf.png?raw=true" alt="NWChem Graph" width="600">
 
