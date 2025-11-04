@@ -145,7 +145,7 @@ COMMON_FLAGS="\
 # Configuration Instructions
 ## Build Instructions  
 
-### Install Miniforge
+#### Install Miniforge
 ```
 wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O ${HOME}/scratch/Miniforge3-Linux-x86_64.sh
 
@@ -157,26 +157,53 @@ bash
 ```
 
 
-### Install Python3.12
+#### Install Python3.12
 ```
 conda create -p ${HOME}/scratch/py312 python=3.12 -y
 ```
 
 
-### Install SGLang into Python
+#### Install SGLang into Python
 ```
 ${HOME}/scratch/py312/bin/pip install --upgrade pip
 
 ${HOME}/scratch/py312/bin/pip install "sglang[all]>=0.5.0rc2"
 ```
 
-### Download Json Dataset File
+#### Download Json Dataset File
 ```
 wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
 ```
 ## Configuring parameters
-Please refer to [submit_job_llama.txt ](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/submit_job_llama.txt)  
-This command is used for configuring initialization parameters such as number of nodes, number of GPUs, batch size, max steps, and walltime.  
+### System Settings
+```
+module load cuda
+```
+
+### Configuration Settings
+- Number of nodes: 2 GPU nodes
+- Total GPUs: 16
+- Total CPUs: 224
+- Total memory allocation: 3760GB
+- Benchmark prompts: 2000
+- Load format: Dummy
+- Random seed: 2025
+- Time limit: 420 seconds
+- MPI processes: 2 per node  
+
+### Model and Dataset Settings
+- model_path = deepseek-ai/DeepSeek-R1
+- dataset_path = ${HOME}/scratch/ShareGPT_V3_unfiltered_cleaned_split.json
+- num_prompts = 2000
+- load_format = dummy
+- seed = 2025
+- dtype = bfloat16
+- trust_remote_code = True
+
+
+### Warm Up Settings (All config settings are the same except for num_prompts)
+
+- num_prompts = 64
 
 ## Read results
 Methods to read output file  
