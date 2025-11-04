@@ -17,9 +17,17 @@ Our project for the APAC HPC AI Competition 2025 focuses on the implementation a
 # Objectives
 The objective is to leverage these advanced computational tools and high-performance computing resources to solve complex problems in quantum chemical molecular dynamics (NWChem) and large language model (DeepSeek) efficiently, with a primary focus on achieving maximum optimization.
 ### NwChem
-In NWChem, we were tasked with running the NWChem input file with large, iterative matrix multiplications, and heavy operations within 5 minutes time constraint. We need **to improve performance by accomplishing lower processing time used by CPUs and elapsed time.**
+In NWChem, we were tasked with running the NWChem input file with large, iterative matrix multiplications, and heavy operations within 5 minutes time constraint. We need **to improve performance by accomplishing lower processing time used by CPUs and elapsed time.**  
+Performance metric:
+1. CPU time (sec)
+2. Wall time (sec)
 ### DeepSeek-SGLang
 In DeepSeek-SGLang, we were tasked with running the DeepSeek-R1 model on the SGLang framework using the ShareGPT dataset, with the goal of completing execution within just 7 minutes. We are required **to improve performance by accomplishing higher value of total token processing speed and other metrics.**
+Performance metric:
+1. Total token throughput (tokens/sec)
+2. Input token throughput (tokens/sec)
+3. Output token throughput (tokens/sec)
+4. Request throughput (req/sec)
 
 # Optimization Method
 ### NWChem
@@ -41,8 +49,13 @@ In DeepSeek-SGLang, we were tasked with running the DeepSeek-R1 model on the SGL
 
 
 # Challenges
-Discuss any challenges or obstacles faced during the project and how they were addressed.
+* Memory Management – handling large molecular datasets and optimizing memory use is complex and resource-intensive.
+* Time-Consuming Process – Frequent errors and repeated test runs increased total development time.
+* Walltime exceeded
+* Batch jobs stuck in a queue
 
 # Conclusion
-Summarize the key findings and outcomes of your project.
+The optimized NWChem runs showed significant improvements in execution time and scalability, achieving faster Wall Time and better parallel efficiency as more cores were added.  
+  
+The optimized DeepSeek model has shown an increasing improvements in throughput and scalability, achieving higher token generation speed and better GPU utilization. These optimizations allow the model to fully leverage the underlying multi-GPU (16×H100) infrastructure, delivering faster inference times while maintaining output consistency and accuracy.
 
