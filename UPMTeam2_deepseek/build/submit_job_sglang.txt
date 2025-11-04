@@ -1,3 +1,0 @@
-1. cd $HOME/run
-
-2. qsub $HOME/sglang-warmup.sh
