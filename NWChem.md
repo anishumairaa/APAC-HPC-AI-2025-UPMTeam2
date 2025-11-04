@@ -447,7 +447,7 @@ grep "Total times:" ./run.script.pbs.stdout
 
 * Wall Time (real elapsed time) drops significantly as more nodes are added.
 
-* Demonstrates effective parallelization — workloads are successfully distributed across multiple CPUs.
+* Demonstrates effective parallelization where workloads are successfully distributed across multiple CPUs.
 
 * Speedup trend indicates near-linear scaling up to 4 nodes.
 
@@ -456,3 +456,27 @@ grep "Total times:" ./run.script.pbs.stdout
 * Comparative performance of configurations on different memory directives shows 16000/200/16000 increased by 47.4% CPU Time and 84.8% Wall Time from the baseline.  
 <img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/images/nwchem-graph-diff-conf.png?raw=true" alt="NWChem Graph" width="600">
 <img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/images/nwchem-graph-analysis-memory.png?raw=true" alt="NWChem Graph" width="600">
+
+## Graph 2 – Comparative Performance on 4 Processing Nodes
+
+* Compares different configuration/job sizes (e.g., 4000, 8000, 16000) under the same 4-node setup.
+
+* The largest configuration (16000) achieves the fastest completion time, meaning NWChem performs best under higher workloads.
+
+* Medium and small configurations (4000 & 8000) take relatively longer, showing less efficiency for smaller-scale jobs.
+
+* Indicates resource utilization on multiple nodes is maximized for larger problem sizes.
+
+* Suggests possible overhead or idle cycles during smaller tasks, reducing parallel efficiency.
+
+## Graph Analysis Summary (NWChem)
+
+* More nodes = faster computation — demonstrates scalability and efficiency of hybrid MPI+OpenMP implementation.
+
+* Parallel processing is validated — CPU Time far exceeds Wall Time, confirming simultaneous multi-thread execution.
+
+* Speedup ratio improves substantially when doubling or quadrupling node count.
+
+* Optimal performance observed with high workloads on 4-node configuration, aligning with expected HPC scaling behavior.
+
+* Inference: The system performs best when given heavy computational tasks that fully utilize available CPU and memory resources.
