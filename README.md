@@ -45,8 +45,10 @@ Performance metric:
   
 # Results
 ### NWChem
+* Performance scaling across different nodes shows 4 nodes increased by 31.6% CPU Time and 81.3% Wall Time from the baseline.  
 <img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/73503bc2ea4fbc676fb2a72fb495919acbb2a726/images/nwchem-graph-diff-nodes.png" alt="Sample Image" width="600" height="500">
-
+* Comparative performance of configurations on different memory directives shows 16000/200/16000 increased by 47.4% CPU Time and 84.8% Wall Time from the baseline.  
+<img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/73503bc2ea4fbc676fb2a72fb495919acbb2a726/images/deepseek-graph.png" alt="Sample Image" width="600" height="500">
 ### DeepSeek-SGLang
 * Total token throughput that defines as speed of token processed and generated is increased by 11% from the baseline.  
 <img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/73503bc2ea4fbc676fb2a72fb495919acbb2a726/images/deepseek-graph.png" alt="Sample Image" width="600" height="500">
