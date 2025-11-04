@@ -330,6 +330,63 @@ dft
   ...
 end
 ```
+# Configuraion Instructions
+## Build Instructions
+### Prerequisies and Enviroment Setup
+```
+# Load required modules
+module purge
+module load nwchem/7.0.0
+
+# Verify NWChem installation
+which nwchem
+nwchem --version
+```
+## Configuring Parameters
+Our implementation are proven to follow all competition rules.
+### Requirements; Library Dependencies
+Our implementation requires:
+**Mandatory:**
+**NWChem**: Version 7.0.0 (pre-installed on cluster)
+**MPI**: OpenMPI 4.1.x or IntelMPI
+**Linear Algebra**: Intel MKL or OpenBLAS (pre-configured)
+### System Settings
+**1. OpenMP Thread Configuration**
+```
+# Hybrid MPI+OpenMP parallelization
+export OMP_NUM_THREADS=4
+export OMP_PLACES=cores
+export OMP_PROC_BIND=close
+
+# For pure MPI (alternative approach)
+export OMP_NUM_THREADS=1
+```
+**2. MPI Communication Optimization**
+```
+# UCX (Unified Communication X) optimization
+export UCX_LOG_LEVEL=error
+export UCX_MEMTYPE_CACHE=n
+
+# NCCL settings (if applicable)
+export NCCL_DEBUG=WARN
+```
+**3. NUMA and CPU Affinity**
+```
+# CPU frequency and NUMA optimization
+export OMP_PROC_BIND=close
+export OMP_PLACES=cores
+
+# MPI process binding
+mpirun --bind-to core --map-by ppr:26:node:PE=4 ...
+```
+**4. File System and I/O**
+```
+# Use high-performance scratch filesystem
+export SCRATCH_DIR=/scratch/${USER}/${PBS_JOBID}
+mkdir -p ${SCRATCH_DIR}
+cd ${SCRATCH_DIR}
+```
+
 # Performance Results
 ## Table 1: Node and MPI Process Scaling
 | Feature | Baseline (1 node) | Optimized (1 node) | Optimized (2 nodes) | Optimized (4 nodes) | Impact |
