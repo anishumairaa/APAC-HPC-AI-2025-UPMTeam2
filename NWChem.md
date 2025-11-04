@@ -248,10 +248,10 @@ time mpirun -np 104 --map-by ppr:26:node:PE=4 --bind-to core \
 
 # Different of Baseline vs Optimized Script
 ## PBS Script Changes
-| Feature          | Baseline             | Optimized           |
-|------------------|----------------------|---------------------|
-| Resources        | 'ncpus=04,mem=208gb' | ncpus=416+mem2048gb'|      
-| Nodes            | 1 node               | 4 node              |
+| Feature          | Baseline             | Optimized            |
+|------------------|----------------------|----------------------|
+| Resources        | ncpus=04,mem=208gb   | ncpus=416+mem2048gb  |      
+| Nodes            | 1 node               | 4 node               |
 ## Key Script Modification
 ### Added in optimized version
 ```
