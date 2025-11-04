@@ -209,10 +209,13 @@ module load cuda
 ## Submit jobs
 To submit jobs, we run command in [submit_job_sglang.txt ](UPMTeam2_deepseek/build/submit_job_sglang.txt)  
 ```
-cd $HOME/run
+cd $HOME/scratch/run
 qsub $HOME/sglang-warmup.sh
 ```
-
+## Read results
+```
+cat ${HOME}/scratch/run/sglang-warmup.sh.o<JOB_ID> | grep "Offline Throughput Benchmark Result" -A 11
+```
 # Reference Results
 ## Performance metrics
 Training time (s): This measures how long it takes to complete the training.  
