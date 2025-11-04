@@ -472,9 +472,9 @@ grep "Total times:" ./run.script.pbs.stdout
 
 ## Graph Analysis Summary (NWChem)
 
-* More nodes = faster computation — demonstrates scalability and efficiency of hybrid MPI+OpenMP implementation.
+* More nodes = faster computation, it demonstrates scalability and efficiency of hybrid MPI+OpenMP implementation.
 
-* Parallel processing is validated — CPU Time far exceeds Wall Time, confirming simultaneous multi-thread execution.
+* Parallel processing is validated as CPU Time far exceeds Wall Time, confirming simultaneous multi-thread execution.
 
 * Speedup ratio improves substantially when doubling or quadrupling node count.
 
