@@ -355,6 +355,16 @@ end
 | **Wall Time (s)** | 44.8 | 45.0 | 36.5 | 18% improvement |
 | **Speedup vs Baseline** | 5.40× | 5.37× | 6.63× | Best: 6.63× |
 
+## Table 3: Performance Summary Table
+| Configuration | Nodes | MPI×OMP | Memory (stack/heap/global) | Wall Time (s) | Speedup | Efficiency |
+|--------------|-------|---------|---------------------------|---------------|---------|------------|
+| Baseline | 1 | 104×1 | 8000/100/8000 | 241.8 | 1.00× | 100% |
+| Optimized 1N | 1 | 26×4 | 8000/100/8000 | 149.6 | 1.62× | 162% |
+| Optimized 2N | 2 | 52×4 | 8000/100/8000 | 75.3 | 3.21× | 161% |
+| Optimized 4N | 4 | 104×4 | 8000/100/8000 | 45.0 | 5.37× | 134% |
+| Optimized 4N (low mem) | 4 | 104×4 | 4000/50/5000 | 44.8 | 5.40× | 135% |
+| **Optimized 4N (high mem)** | **4** | **104×4** | **16000/200/16000** | **36.5** | **6.63×** | **166%** |
+
 ## Result Analysis 
 The steps per second increases substantially with a higher number of nodes:
   - 1 node, 48 cores: 423 steps per seconds
