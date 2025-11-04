@@ -346,10 +346,9 @@ nwchem --version
 Our implementation are proven to follow all competition rules.
 ### Requirements; Library Dependencies
 Our implementation requires:
-**Mandatory:**
-**NWChem**: Version 7.0.0 (pre-installed on cluster)
-**MPI**: OpenMPI 4.1.x or IntelMPI
-**Linear Algebra**: Intel MKL or OpenBLAS (pre-configured)
+- **NWChem**: Version 7.0.0 (pre-installed on cluster)
+- **MPI**: OpenMPI 4.1.x or IntelMPI
+- **Linear Algebra**: Intel MKL or OpenBLAS (pre-configured)
 ### System Settings
 **1. OpenMP Thread Configuration**
 ```
