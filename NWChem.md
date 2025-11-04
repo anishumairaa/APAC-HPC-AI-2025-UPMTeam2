@@ -385,6 +385,9 @@ export SCRATCH_DIR=/scratch/${USER}/${PBS_JOBID}
 mkdir -p ${SCRATCH_DIR}
 cd ${SCRATCH_DIR}
 ```
+## Steps in optimzing and runnning
+**1.Adjust and run 'input.sh'**
+-Configure the input by editing the 'input.sh' file and run the script by './input.sh'
 
 # Performance Results
 ## Table 1: Node and MPI Process Scaling
