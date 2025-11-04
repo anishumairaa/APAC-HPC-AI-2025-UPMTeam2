@@ -1,6 +1,6 @@
 # DeepSeek-SGLang Base Code
-## Setting up DeepSeek-SGLang
-We are using Aspire2A as our cluster.  
+## Base Code Information
+We are using Aspire2P as our cluster.  
 This project used the base script `sglang.sh` from [2025-APAC-HPC-AI. ](https://github.com/hpcac/2025-APAC-HPC-AI/blob/main/5_1_SGLang_DeepSeek_Application_Notes_ASPIRE2A%2B.md)  **This script is used as baseline.**  
   
 A script file `${HOME}/sglang-baseline.sh` with the following contents  
@@ -33,7 +33,7 @@ bash -c 'time ${HOME}/scratch/py312/bin/python3 \
 2>&1 | tee ${HOME}/run/stdout.sglang-baseline.${PBS_JOBID}
 ```
 
-# Modifications to the code
+# Script Modifications
 From the baseline script `${HOME}/sglang-baseline.sh`, we modified it into `${HOME}/sglang-warmup.sh`  
 Our tuned-script file `${HOME}/sglang-warmup.sh` with the following contents  
 ```
@@ -102,7 +102,7 @@ time /usr/mpi/gcc/openmpi-4.1.7a1/bin/mpirun \
     --load-format dummy \
   " 2>&1 | tee ${HOME}/scratch/run/stdout.sglang-warmup.${PBS_JOBID}
 ```
-## Diff of baseline vs finetuned script
+### Diff of baseline vs finetuned script
 We added and modified few lines in `sglang-warmup.sh`, that are:
 ```
 export CUDA_DEVICE_MAX_CONNECTIONS=1
@@ -142,7 +142,48 @@ COMMON_FLAGS="\
   " || true
 
 ```
+# Configuration Instructions
+## Build Instructions  
 
+### Install Miniforge
+```
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O ${HOME}/scratch/Miniforge3-Linux-x86_64.sh
+
+bash ${HOME}/scratch/Miniforge3-Linux-x86_64.sh -b -p ~/scratch/miniforge
+
+${HOME}/scratch/miniforge/bin/conda init
+
+bash
+```
+
+
+### Install Python3.12
+```
+conda create -p ${HOME}/scratch/py312 python=3.12 -y
+```
+
+
+### Install SGLang into Python
+```
+${HOME}/scratch/py312/bin/pip install --upgrade pip
+
+${HOME}/scratch/py312/bin/pip install "sglang[all]>=0.5.0rc2"
+```
+
+### Download Json Dataset File
+```
+wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
+```
+## Configuring parameters
+Please refer to [submit_job_llama.txt ](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/submit_job_llama.txt)  
+This command is used for configuring initialization parameters such as number of nodes, number of GPUs, batch size, max steps, and walltime.  
+
+## Read results
+Methods to read output file  
+`cat llama.nodes2.GBS128.MBS32.o8613326`  
+  
+Check training time  
+`grep "Training time" ${HOME}/run/output/llama.*/1/rank.*/*`
 
 ## Submit jobs
 To submit jobs, we run command in [submit_job_sglang.txt ](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/submit_job_llama.txt)  
@@ -201,66 +242,6 @@ Although our script has improved slightly in the training speed, but our script 
 
 ## Output file
 Our output file for `tuningllama.sh` is in [llama.nodes2.GBS128.MBS32.o8613326](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/llama.nodes2.GBS128.MBS32.o8613326) 
-
-# Configuration Instructions
-### Prerequisites
-- **CMake** (version 3.10 or higher)
-- **GCC** (version 7.5 or higher) or any other C++ compiler
-- **Python** (version 3.6 or higher)
-
-### Modules load
-```
-module purge
-module load openmpi/4.1.2-hpe
-module load libfabric/1.11.0.4.125
-env | grep -E 'NCCL|OMP|CUDA'
-```
-## Enable MPI Support for LitGPT Pytorch
-
-The following commands
-
-1. Load administrator-provided Environment modules to configure environment variables for the running shell
-2. Install `mpi4py` from the shell to enable MPI Support for Python AI frameworks
-
-```bash
-#module purge
-module load openmpi/4.1.5
-
-time LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/pbs/default/lib:/lib64 \
-MPI4PY_BUILD_MPICC=$OMPI_ROOT/bin/mpicc \
-${HOME}/scratch/workdir/llama/litgpt.py312/bin/pip \
-install --no-cache-dir mpi4py
-# real	1m41.891s
-```
-# Prepare Dataset and LitGPT Configuration
-
-## Get Dataset and Model files
-
-The Llama2 module files and Alpaca dataset are available in the shared storage directory at `/scratch/public`
-
-```bash
-mkdir -p ${HOME}/scratch/workdir/llama/model/litgpt/meta-llama/Llama-2-7b-hf
-mkdir -p ${HOME}/scratch/workdir/llama/dataset
-
-time rsync -avSP \
-/scratch/public/2024-apac-hpc-ai/llama/model/litgpt/meta-llama/Llama-2-7b-hf/ \
-${HOME}/scratch/workdir/llama/model/litgpt/meta-llama/Llama-2-7b-hf/
-
-time rsync -avSP \
-/scratch/public/2024-apac-hpc-ai/llama/dataset/ \
-${HOME}/scratch/workdir/llama/dataset/
-```
-
-## Configuring parameters
-Please refer to [submit_job_llama.txt ](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/submit_job_llama.txt)  
-This command is used for configuring initialization parameters such as number of nodes, number of GPUs, batch size, max steps, and walltime.  
-
-## Read results
-Methods to read output file  
-`cat llama.nodes2.GBS128.MBS32.o8613326`  
-  
-Check training time  
-`grep "Training time" ${HOME}/run/output/llama.*/1/rank.*/*`
 
 ## Testing methods  
 1. Refer to the configuration instructions to set up the environment.  
