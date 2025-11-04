@@ -175,6 +175,7 @@ ${HOME}/scratch/py312/bin/pip install "sglang[all]>=0.5.0rc2"
 wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
 ```
 ## Configuring parameters
+Our implementation are proven to follow all competition rules.  
 ### System Settings
 ```
 module load cuda
@@ -205,15 +206,12 @@ module load cuda
 
 - num_prompts = 64
 
-## Read results
-Methods to read output file  
-`cat llama.nodes2.GBS128.MBS32.o8613326`  
-  
-Check training time  
-`grep "Training time" ${HOME}/run/output/llama.*/1/rank.*/*`
-
 ## Submit jobs
-To submit jobs, we run command in [submit_job_sglang.txt ](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/submit_job_llama.txt)  
+To submit jobs, we run command in [submit_job_sglang.txt ](UPMTeam2_deepseek/build/submit_job_sglang.txt)  
+```
+cd $HOME/run
+qsub $HOME/sglang-warmup.sh
+```
 
 # Reference Results
 ## Performance metrics
@@ -269,9 +267,3 @@ Although our script has improved slightly in the training speed, but our script 
 
 ## Output file
 Our output file for `tuningllama.sh` is in [llama.nodes2.GBS128.MBS32.o8613326](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/llama.nodes2.GBS128.MBS32.o8613326) 
-
-## Testing methods  
-1. Refer to the configuration instructions to set up the environment.  
-2. Create `tuningllama.sh` script in `cd $HOME/run`  
-3. Submit job command using the `submit_job_llama.txt`  
-4. Read output file and check training time as mentioned ealier.  
