@@ -225,15 +225,30 @@ This section explains details on runtime optimization used in our `sglang-warmup
 ### NCCL Communication Tuning
 ```
 export NCCL_IB_HCA=mlx5
+```
+It tells NCCL to use mlx5 network interface to use for GPU communication over InfiniBand, which helps with faster multi-node training.
+```
 export NCCL_NET_GDR_LEVEL=PHB
+```
+This setting is powerful as it can allow direct send/recv data to/from network adapters without CPU involvement. It will use GDR (GPUDirect RDMA) if the GPU and NIC are connected under the same PCIe host bridge, that cuts latency and increases data throughput dramatically.
+```
 export NCCL_SOCKET_IFNAME="ib0,bond0,eno1,eth0"
 ```
+This setting specifies Infiniband interface, or other Ethernet interfaces to use for socket-based communication. With the direct InfiniBand (the fastest) specification, it helps to avoid confusion when a node has many interfaces.
+
 ### CUDA Efficiency Settings
 ```
 export CUDA_DEVICE_MAX_CONNECTIONS=1
+```
+This setting can limit GPU concurrency, where it can stabilize NCCL communication and reduces contention.
+```
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+```
+It tells only GPUs 0–7 visible to the program.
+```
 export NVIDIA_TF32_OVERRIDE=0
 ```
+This disables TF32 because it uses less precision, which is fewer decimal digits. In `sglang-warmup.sh` script, bfloat16 is used. If TF32 is left on together with bfloat16, the GPU may mix different math precisions and causes inconsistent results between runs. Moreover, this setting helps better math accuracy.
 
 
 # Reference Results
