@@ -1,42 +1,127 @@
-# HOOMD-Blue Base Code
-This project is based on https://github.com/hpcac/2024-APAC-HPC-AI  
-We copied baseline code from that github link, and changed the pbs initializations such as project code and email address. GCC is being utilized as the compiler for this project.  
-The copied `hoomd.sh` with this content:
+# NWChem Base Code
+## Setting up NWChem on HPC Cluster
+This project is based on https://github.com/hpcac/2025-APAC-HPC-AI  
+We are using a PBS-based HPC cluster with NWChem 7.0.0.
+This project optimizes DFT calculations for water clusters using B3LYP/cc-pVTZ level of theory.
+## Base Script - Original Configuration
+A baseline script file in `${HOME}/scratch/${USER}/run/` with the following contents:
 ```
+mkdir -p ${HOME}/scratch/${USER}/run
+
+tee ${HOME}/scratch/${USER}/run/nwchem.sh << 'EOF'
 #!/bin/bash
-#PBS -j oe  
-#PBS -M 216990@student.upm.edu.my,214928@student.upm.edu.my,215541@student.upm.edu.my,215014@student.upm.edu.my,214511@student.upm.edu.my
+#PBS -P pc08
+#PBS -q normalsr
+#PBS -l walltime=00:05:00
+#PBS -l ncpus=104,mem=208gb
+#PBS -j oe
+#PBS -M 393958790@qq.com
 #PBS -m abe
-#PBS -P zd64
-#PBS -l ngpus=0
-#PBS -l walltime=00:00::60
-#PBS -l other=hyperthread
-#-report-bindings \
+##PBS -l other=hyperthread
 
+# Load required modules
 module purge
-module load ${HOME}/hpcx-v2.20-gcc-mlnx_ofed-redhat8-cuda12-x86_64/modulefiles/hpcx-ompi
+module load nwchem/7.0.0
 
-hosts=$(sort -u ${PBS_NODEFILE} | paste -sd ',')
+env
+env | grep -E "(PBS|OMP)" | sort
+module list
 
-cmd="time mpirun \
-    -host ${hosts} \
-    -wdir ${HOME}/scratch/workdir/hoomd \
-    -output-filename ${HOME}/run/output/${PBS_JOBNAME}.${PBS_JOBID} \
-    -map-by ppr:$((1*${NCPUS})):node \
-    -oversubscribe -use-hwthread-cpus \
-    -x PYTHONPATH=${HOME}/scratch/workdir/hoomd/build/hoomd-openmpi4.1.5:${HOME}/scratch/workdir/hoomd/hoomd-benchmarks \
-    ${HOME}/scratch/workdir/hoomd/hoomd.py312/bin/python \
-    -m hoomd_benchmarks.md_pair_wca \
-    --device CPU -v \
-    -N ${N} --repeat ${repeat} \
-    --warmup_steps ${warmup_steps} --benchmark_steps ${benchmark_steps}"
+export OMP_NUM_THREADS=1
 
-echo ${cmd}
+# Change to working directory
+mkdir -p ${HOME}/scratch/${USER}/nwchem/run/${PBS_JOBID}
+cd       ${HOME}/scratch/${USER}/nwchem/run/${PBS_JOBID}
 
-exec ${cmd}
+OUTPUT_FILE=${HOME}/run/job.${PBS_JOBNAME}.stdout
+
+time mpirun -np ${NCPUS:-104} \
+    nwchem \
+    ${HOME}/scratch/${USER}/nwchem/input/w12_b3lyp_cc-pvtz_energy.nw \
+    2>&1 | tee ${OUTPUT_FILE}
+EOF
 
 ```
+## NWChem Input File - Original
+The original inpuy file in `${HOME}/scratch/${USER}/nwchem/input/w12_b3lyp_cc-pvtz_energy.nw`:
+```
 
+echo
+
+start w12_b3lyp_cc-pvtz_energy
+
+memory stack 8000 mb heap 100 mb global 8000 mb noverify
+
+permanent_dir .
+scratch_dir /tmp
+
+geometry units angstrom
+  O       1.79799517    -2.87189360    -0.91374020
+  O       0.96730604    -2.75911220     1.62798799
+  O       1.65380168    -0.07006642    -1.01974524
+  O       1.02235809     0.07175530     1.65572815
+  O      -1.02223258     0.06714841    -1.65231025
+  O      -1.65303657    -0.06953734     1.02328922
+  O      -1.79714075    -2.87225082     0.91489225
+  O      -0.96714604    -2.76268933    -1.62695366
+  O      -0.91046484     2.86984708    -1.80205865
+  O       1.62976535     2.75963881    -0.96492508
+  O       0.90962365     2.87584732     1.79706100
+  O      -1.63064745     2.76057720     0.96075175
+  H       1.58187452    -2.90533857     0.05372043
+  H       2.45880812    -3.55319457    -1.06640225
+  H      -1.58013630    -2.90956053    -0.05228132
+  H      -2.45728026    -3.55363054     1.07010099
+  H       0.05632428     2.90394112    -1.58314254
+  H      -1.06231290     3.55393270    -2.46019459
+  H      -1.56680088     2.89107809    -0.00131897
+  H      -1.92210192     1.83983329     1.06475175
+  H       1.34757079     0.06744042     0.72858318
+  H       1.14627218     0.98941003     1.95482520
+  H      -1.14676057     0.98295160    -1.95675717
+  H      -1.34650335     0.06810117    -0.72482129
+  H       0.72810518    -0.06186014    -1.34872142
+  H       1.95057642    -0.98833069    -1.14558354
+  H      -0.72703573    -0.06575415     1.35156867
+  H      -1.95270073    -0.98745311     1.14464678
+  H       1.56681459     2.89291882    -0.00316599
+  H       1.92433921     1.83983329    -1.06611724
+  H      -0.00511757    -2.89477284    -1.56679971
+  H      -1.07087869    -1.84139535    -1.91693517
+  H      -0.05748186     2.90789148     1.57927484
+  H       1.06103881     3.56065162     2.45452965
+  H       0.00532585    -2.89179177     1.56768173
+  H       1.07022772    -1.83898762     1.92167783
+end
+
+basis "ao basis" spherical noprint
+  * library cc-pvtz
+end
+
+scf
+  direct
+  singlet
+  rhf
+  thresh 1e-7
+  maxiter 100
+  vectors input atomic output w12_scf_cc-pvtz.movecs
+  noprint "final vectors analysis" "final vector symmetries"
+end
+
+task scf energy ignore
+
+dft
+  direct
+  xc b3lyp
+  grid fine
+  iterations 100
+  vectors input w12_scf_cc-pvtz.movecs
+  noprint "final vectors analysis" "final vector symmetries"
+end
+
+task dft energy
+
+```
 # Modifications to the code 
 The number of nodes, walltime configuration,warmup steps and benchmark steps were adjusted to optimize performance, allowing for a comparative analysis of the results to identify the most efficient configuration
 
