@@ -39,9 +39,37 @@ Performance metric:
 
 ### DeepSeek-SGLang
 * NCCL communication tuning
-* CUDA efficiency settings
-* Warm-up execution
+```
+export NCCL_IB_HCA=mlx5
+```
+> Specifies mlx5 RDMA interface to use for communication
+```
+export NCCL_NET_GDR_LEVEL=PHB
+```
+> Control when to use GPU Direct RDMA between a NIC and a GPU
 
+```
+export NCCL_SOCKET_IFNAME="ib0,bond0,eno1,eth0"
+```
+> Specifies the network interfaces NCCL should use: InfiniBand
+
+>
+* CUDA efficiency settings
+ ```
+export CUDA DEVICE MAX CONNECTIONS=1
+```
+> Limits how many concurrent connections each CUDA device (GPU) can have 
+ ```
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,,6,7
+```
+> Makes only GPUs 0–7 visible to the program. 
+ ```
+export NVIDIA_TF32_OVERRIDE=0
+```
+> Disable TF32 to only adhere to bfloat16 for more math accuracy
+
+* Warm up execution
+  
 # Results
 ### NWChem
 * (achievement, graphs)
