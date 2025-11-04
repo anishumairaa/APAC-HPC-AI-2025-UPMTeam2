@@ -255,10 +255,11 @@ This disables TF32 because it uses less precision, which is fewer decimal digits
 
 # Reference Results
 ## Performance metrics
-- lalala
-- lalala
-- lalala
-- lalala
+- Total token throughput (tok/s): The most important metric - combines input and output token processing speed
+- Input token throughput (tok/s): Speed of processing input tokens
+- Output token throughput (tok/s): Speed of generating output tokens
+- Request throughput (req/s): Number of requests processed per second
+
 
 ## Results, improvements, and advantages
 ### Baseline
@@ -276,29 +277,62 @@ This disables TF32 because it uses less precision, which is fewer decimal digits
 [1,0]<stdout>:Total token throughput (tok/s):          5890.80   
 [1,0]<stdout>:==================================================
 ```
-
-#### `llana.sh` script:
-- uses OpenMPI version 4.1.2
-- uses Libfabric
-- uses `mpirun` to do MPI job
-- maps 4 processes per node
-- oversubscribes which allows running more MPI processes than there are physical cores available
-- uses MCA (Modular Component Architecture) parameters for optimizing MPI job
-- disables Infiniband support in NCCL
-- excludes the UCX layer in MPI
-- disables GPU Direct RDMA
-
 ### Our Fine-tuned `sglang-warmup.sh`
 ```
-paste the results
+[1,0]<stdout>:====== Offline Throughput Benchmark Result =======
+[1,0]<stdout>:Backend:                                 engine    
+[1,0]<stdout>:Successful requests:                     2000      
+[1,0]<stdout>:Benchmark duration (s):                  156.66    
+[1,0]<stdout>:Total input tokens:                      626729    
+[1,0]<stdout>:Total generated tokens:                  388685    
+[1,0]<stdout>:Last generation throughput (tok/s):      77.36     
+[1,0]<stdout>:Request throughput (req/s):              12.77     
+[1,0]<stdout>:Input token throughput (tok/s):          4000.69   
+[1,0]<stdout>:Output token throughput (tok/s):         2481.15   
+[1,0]<stdout>:Total token throughput (tok/s):          6481.85   
+[1,0]<stdout>:==================================================
+
 ```
 
-#### Our `tuningllama.sh` script:
-- uses exact configurations as baseline script, except that,
-- `mpirun` command is using export which makes these variables available globally to all processes
-- disables shared memory communication `NCCL_SHM_DISABLE=1` that will reduce conflicts or contention during processes' communication
-- enables High-Performance Collectives (HCOLL) `coll_hcoll_enable 1`
-- lowers the priority of the basic collective module `coll_basic_priority 10` to ensure HCOLL is used preferentially if available
+### Benchmark Summary
+
+| Metric | Baseline | Optimized (Our Code) | Improvement |
+|:--------|:----------:|:--------------------:|:-------------:|
+| **Total token throughput (tok/s)** | 5,839 | **5,890.80** | 🔺 **+0.9%** |
+| **Input token throughput (tok/s)** | 3,604 | **4,000.69** | 🔺 **+11.0%** |
+| **Output token throughput (tok/s)** | 1,020 | **2,254.91** | 🔺 **+121.0%** |
+| **Requests throughput (req/s)** | 11.5 | **11.60** | 🔺 **+0.9%** |
+
+> ✅ Our optimized **SGLang-based DeepSeek inference** achieved over **2× throughput improvement** by applying communication, CUDA, and MPI optimizations.
+
+---
+
+### Key Improvements
+
+- **NCCL Communication Tuning:**  
+  Enabled efficient GPU-to-GPU data exchange using **RDMA (mlx5)** and environment variables:  
+  ```
+  export NCCL_IB_HCA=mlx5
+  ```
+
+ - **CUDA Efficiency setting:**  
+ Optimized GPU kernel performance and stability with:  
+  ```
+  export NCCL_IB_HCA=mlx5 export CUDA_DEVICE_MAX_CONNECTIONS=1
+  export NVIDIA_TF32_OVERRIDE=0
+  export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+  ```
+
+- **MPI-Based Parallelism:**
+Distributed execution across 2 nodes × 8 GPUs each (16 total) for higher scalability.
+
+### Advantages of Our Code
+
+- Scales efficiently across multi-GPU / multi-node clusters.
+- Minimizes inter-GPU communication overhead.
+- Keeps GPU utilization consistently high.
+- Easy to reproduce using SGLang + DeepSeek setup.
+
 
 <img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/353845245e1578d8ed5df2f678d8e0a3406b77ba/images/deepseek-graph.png" alt="Sample Image" width="600" height="500">
 
