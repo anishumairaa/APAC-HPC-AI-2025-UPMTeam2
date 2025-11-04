@@ -207,7 +207,7 @@ module load cuda
 - num_prompts = 64
 
 ## Submit jobs
-To submit jobs, we run command in [submit_job_sglang.txt ](UPMTeam2_deepseek/build/submit_job_sglang.txt)  
+To submit jobs, we run command like
 ```
 cd $HOME/scratch/run
 qsub $HOME/sglang-warmup.sh
