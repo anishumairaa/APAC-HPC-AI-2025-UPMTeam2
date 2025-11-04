@@ -36,7 +36,8 @@ In DeepSeek-SGLang, we were tasked with running the DeepSeek-R1 model on the SGL
 ### NWChem
 * (achievement, graphs)
 ### DeepSeek-SGLang
-* Total token throughput that defines as speed of token processed and generated is increased by 11% from the baseline.
+* Total token throughput that defines as speed of token processed and generated is increased by 11% from the baseline.  
+<img src="https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/73503bc2ea4fbc676fb2a72fb495919acbb2a726/images/deepseek-graph.png" alt="Sample Image" width="600" height="500">
 
 
 # Challenges
