@@ -216,6 +216,20 @@ qsub $HOME/sglang-warmup.sh
 ```
 cat ${HOME}/scratch/run/sglang-warmup.sh.o<JOB_ID> | grep "Offline Throughput Benchmark Result" -A 11
 ```
+
+# Runtime Optimization
+This section explains details on runtime optimization used in our `sglang-warmup.sh`
+1. NCCL communication tuning
+2. CUDA efficiency settings
+
+### NCCL Communication Tuning
+```
+export NCCL_IB_HCA=mlx5
+export NCCL_NET_GDR_LEVEL=PHB
+export NCCL_SOCKET_IFNAME="ib0,bond0,eno1,eth0"
+```
+
+
 # Reference Results
 ## Performance metrics
 - lalala
