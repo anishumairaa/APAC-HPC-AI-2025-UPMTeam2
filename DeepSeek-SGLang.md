@@ -228,6 +228,12 @@ export NCCL_IB_HCA=mlx5
 export NCCL_NET_GDR_LEVEL=PHB
 export NCCL_SOCKET_IFNAME="ib0,bond0,eno1,eth0"
 ```
+### CUDA Efficiency Settings
+```
+export CUDA_DEVICE_MAX_CONNECTIONS=1
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export NVIDIA_TF32_OVERRIDE=0
+```
 
 
 # Reference Results
