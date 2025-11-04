@@ -33,9 +33,11 @@ In DeepSeek-SGLang, we were tasked with running the DeepSeek-R1 model on the SGL
 * Warm-up execution
 
 # Results
-[HOOMD Blue]
-* Steps per second increased when more nodes and cores are used. This reflects on the improved performance with additional computational resources
-* 
+### NWChem
+* (achievement, graphs)
+### DeepSeek-SGLang
+* Total token throughput that defines as speed of token processed and generated is increased by 11% from the baseline.
+
 
 # Challenges
 Discuss any challenges or obstacles faced during the project and how they were addressed.
