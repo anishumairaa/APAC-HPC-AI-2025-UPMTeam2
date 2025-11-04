@@ -43,7 +43,7 @@ EOF
 
 ```
 ## NWChem Input File - Original
-The original inpuy file in `${HOME}/scratch/${USER}/nwchem/input/w12_b3lyp_cc-pvtz_energy.nw`:
+The original input file in `${HOME}/scratch/${USER}/nwchem/input/w12_b3lyp_cc-pvtz_energy.nw`:
 ```
 
 echo
@@ -123,44 +123,126 @@ task dft energy
 
 ```
 # Modifications to the code 
-The number of nodes, walltime configuration,warmup steps and benchmark steps were adjusted to optimize performance, allowing for a comparative analysis of the results to identify the most efficient configuration
-
-## Our code vs base code
-Below are the base code according to our reference on https://github.com/hpcac/2024-APAC-HPC-AI  
-
-This configuration allocates:
-- 8 nodes with customized walltime to accommodate the required computational intensity.
-- A higher warmup step count (40000) and benchmark step count (80000) to ensure the benchmarking tests adequately stabilize and yield representative performance data.
-- Memory and CPU allocation based on nodes to utilize available processing power efficiently.
-
-```
-cd ${HOME}/run
-
-nodes=8 walltime=00:00:200 \
-warmup_steps=40000 benchmark_steps=80000 repeat=1 N=200000 \
-bash -c \
-'qsub -V \
--l walltime=${walltime},select=${nodes}:ncpus=$((128*1)):mem=$((128*2))gb \
--N hoomd.nodes${nodes}.WS${warmup_steps}.BS${benchmark_steps}.N${N} \
-hoomd.sh'
+The implementation of fast storage, application of OpenMP and MPI and adjustment in the input, allowing for a comparative analysis of the results to identify the most efficient configuration
+## Creation of Shell script of input file
+Creation of Shell script of input file which allows modifications and execution of the input file, 'input.sh':
 ```
 
-We increase the value of the walltime used,warmup steps and benchmark steps by using different number of nodes for each job and compare their optimization.
+#!/bin/bash
 
-Our modified configuration allocates:
+# Create directory structure
+mkdir -p ${HOME}/scratch/${USER}/nwchem/input
 
-- 32 nodes with a moderate increase in walltime to support enhanced parallelization and scalability testing.
-- Reduced warmup steps (10000) and benchmark steps (8000) to focus on efficient benchmarking with minimal initialization overhead.
-- Memory and CPU dynamically allocated per node, ensuring resources are used efficiently across the larger node allocation.
+# Create the NWChem input file
+tee ${HOME}/scratch/${USER}/nwchem/input/w12_b3lyp_cc-pvtz_energy.nw << 'EOF'
+echo
+start w12_b3lyp_cc-pvtz_energy
+memory stack 8000 mb heap 100 mb global 8000 mb noverify
+permanent_dir .
+scratch_dir /scratch/${USER}/${PBS_JOBID}
+geometry units angstrom
+  O       1.79799517    -2.87189360    -0.91374020
+  O       0.96730604    -2.75911220     1.62798799
+  O       1.65380168    -0.07006642    -1.01974524
+  O       1.02235809     0.07175530     1.65572815
+  O      -1.02223258     0.06714841    -1.65231025
+  O      -1.65303657    -0.06953734     1.02328922
+  O      -1.79714075    -2.87225082     0.91489225
+  O      -0.96714604    -2.76268933    -1.62695366
+  O      -0.91046484     2.86984708    -1.80205865
+  O       1.62976535     2.75963881    -0.96492508
+  O       0.90962365     2.87584732     1.79706100
+  O      -1.63064745     2.76057720     0.96075175
+  H       1.58187452    -2.90533857     0.05372043
+  H       2.45880812    -3.55319457    -1.06640225
+  H      -1.58013630    -2.90956053    -0.05228132
+  H      -2.45728026    -3.55363054     1.07010099
+  H       0.05632428     2.90394112    -1.58314254
+  H      -1.06231290     3.55393270    -2.46019459
+  H      -1.56680088     2.89107809    -0.00131897
+  H      -1.92210192     1.83983329     1.06475175
+  H       1.34757079     0.06744042     0.72858318
+  H       1.14627218     0.98941003     1.95482520
+  H      -1.14676057     0.98295160    -1.95675717
+  H      -1.34650335     0.06810117    -0.72482129
+  H       0.72810518    -0.06186014    -1.34872142
+  H       1.95057642    -0.98833069    -1.14558354
+  H      -0.72703573    -0.06575415     1.35156867
+  H      -1.95270073    -0.98745311     1.14464678
+  H       1.56681459     2.89291882    -0.00316599
+  H       1.92433921     1.83983329    -1.06611724
+  H      -0.00511757    -2.89477284    -1.56679971
+  H      -1.07087869    -1.84139535    -1.91693517
+  H      -0.05748186     2.90789148     1.57927484
+  H       1.06103881     3.56065162     2.45452965
+  H       0.00532585    -2.89179177     1.56768173
+  H       1.07022772    -1.83898762     1.92167783
+end
+basis "ao basis" spherical noprint
+  * library cc-pvtz
+end
+
+dft
+  semidirect memsize 2000000000 filesize 0
+  xc b3lyp
+  grid fine
+  iterations 100
+  vectors input atomic
+  noprint "final vectors analysis" "final vector symmetries"
+end
+task dft energy
+EOF
+
+echo "Input file created at: ${HOME}/scratch/${USER}/nwchem/input/w12_b3lyp_cc-pvtz_energy.nw"
 
 ```
-nodes=32 walltime=00:10:00 \
-warmup_steps=10000 benchmark_steps=8000 repeat=1 N=200000 \
-bash -c \
-'qsub -V \
--l walltime=${walltime},ncpus=$((48*nodes)),mem=$((48*nodes*1))gb \
--N hoomd.nodes${nodes}.WS${warmup_steps}.BS${benchmark_steps} \
-hoomd.sh'
+## The implication of modification:
+- Application of fast storage which separates the slow and fast storage and directing the high-volume data to the parallel file system
+- Implementation of Hybrid Parallelization where threads would share memory efficiently within a node (OpenMP + MPI)
+- Adjustments in the input file such changing the memory directives and removal of SCF energy block
+## Optimized PBS Script
+From the baseline script, we created an optimized version 'script.pbs'
+```
+#!/bin/bash
+#PBS -P ph60
+#PBS -q normalsr
+#PBS -l walltime=00:05:00
+#PBS -l ncpus=416
+#PBS -l mem=2048gb
+#PBS -j oe
+#PBS -m abe
+##PBS -l other=hyperthread
+
+# Load required modules
+module purge
+module load nwchem/7.0.0
+
+# Display environment
+env
+env | grep -E "(PBS|OMP)" | sort
+module list
+
+# Set OpenMP parameters
+export OMP_NUM_THREADS=4
+export OMP_PLACES=cores
+export OMP_PROC_BIND=close
+
+export UCX_LOG_LEVEL=error
+export UCX_MEMTYPE_CACHE=n
+
+# Create and move to scratch directory
+mkdir -p /scratch/${USER}/${PBS_JOBID}
+cd /scratch/${USER}/${PBS_JOBID}
+
+# Set output file location
+OUTPUT_FILE=${HOME}/run/run.${PBS_JOBNAME}.stdout
+mkdir -p ${HOME}/run
+
+# Run NWChem
+time mpirun -np 104 --map-by ppr:26:node:PE=4 --bind-to core \
+    nwchem \
+    ${HOME}/scratch/${USER}/nwchem/input/w12_b3lyp_cc-pvtz_energy.nw \
+    2>&1 | tee ${OUTPUT_FILE}
 
 ```
 ## Submit jobs
