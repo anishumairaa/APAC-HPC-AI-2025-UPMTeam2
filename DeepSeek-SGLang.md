@@ -218,32 +218,29 @@ cat ${HOME}/scratch/run/sglang-warmup.sh.o<JOB_ID> | grep "Offline Throughput Be
 ```
 # Reference Results
 ## Performance metrics
-Training time (s): This measures how long it takes to complete the training.  
-Our goal is to lower the training time as much as we can.  
-## Workload profile
-- Workload: Llama-2-7b finetune-full
-- Max Seq Length: 512
-- Number of Epochs: 1
-- Dataset
-
-| Supercomputer	| NSCC SG Aspire-2A iterations	|
-|:--------------|:------------------------------|
-| Dataset	| Alpaca1024/train.json	        |
-
-
-## Value initialization
-These values are constant throughout the performance improvement process.
-| Num. of nodes | Num. of GPUs | Num. of CPUs | Num. of Epochs | Global Batch Size | Micro Batch Size | Max Steps |
-|:--------------|:-------------|:-------------|:---------------|:------------------|:-----------------|:----------|
-| 2             | 8            | 128          | 1              | 128               | 32               | 20        |
+- lalala
+- lalala
+- lalala
+- lalala
 
 ## Results, improvements, and advantages
 ### Baseline
-| Num. of nodes | Num. of GPUs | Num. of CPUs | Memory Requested | Average Training Time |
-|:--------------|:-------------|:-------------|:-----------------|:----------------------|
-| 2             | 8            | 128          | 17.73            | 41.57s                |  
+```
+[1,0]<stdout>:====== Offline Throughput Benchmark Result =======
+[1,0]<stdout>:Backend:                                 engine    
+[1,0]<stdout>:Successful requests:                     2000      
+[1,0]<stdout>:Benchmark duration (s):                  172.37    
+[1,0]<stdout>:Total input tokens:                      626729    
+[1,0]<stdout>:Total generated tokens:                  388685    
+[1,0]<stdout>:Last generation throughput (tok/s):      33.36     
+[1,0]<stdout>:Request throughput (req/s):              11.60     
+[1,0]<stdout>:Input token throughput (tok/s):          3635.89   
+[1,0]<stdout>:Output token throughput (tok/s):         2254.91   
+[1,0]<stdout>:Total token throughput (tok/s):          5890.80   
+[1,0]<stdout>:==================================================
+```
 
-`llana.sh` script:
+#### `llana.sh` script:
 - uses OpenMPI version 4.1.2
 - uses Libfabric
 - uses `mpirun` to do MPI job
@@ -254,12 +251,12 @@ These values are constant throughout the performance improvement process.
 - excludes the UCX layer in MPI
 - disables GPU Direct RDMA
 
-### Improved script
-| Num. of nodes | Num. of GPUs | Num. of CPUs | Memory Requested | Average Training Time |
-|:--------------|:-------------|:-------------|:-----------------|:----------------------|
-| 2             | 8            | 128          | 17.73            | 28.09s                |  
+### Our Fine-tuned `sglang-warmup.sh`
+```
+paste the results
+```
 
-Our `tuningllama.sh` script:
+#### Our `tuningllama.sh` script:
 - uses exact configurations as baseline script, except that,
 - `mpirun` command is using export which makes these variables available globally to all processes
 - disables shared memory communication `NCCL_SHM_DISABLE=1` that will reduce conflicts or contention during processes' communication
@@ -268,5 +265,5 @@ Our `tuningllama.sh` script:
 
 Although our script has improved slightly in the training speed, but our script is focused on improving inter-node communication performance and stability where shared memory access might cause bottlenecks or instability. In HPC environments where data transfer between GPUs needs efficiency, which can increase training speed. Thus, it is important to concentrated on communication settings in this job.
 
-## Output file
-Our output file for `tuningllama.sh` is in [llama.nodes2.GBS128.MBS32.o8613326](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/llama.nodes2.GBS128.MBS32.o8613326) 
+#### 'sglang-warmup.sh' Output File
+Our output file for `sglang-warmup.sh` is in [stdout.sglang-warmup.89389.pbs111](UPMTeam2_deepseek/results/stdout.sglang-warmup.89389.pbs111) 
