@@ -245,26 +245,97 @@ time mpirun -np 104 --map-by ppr:26:node:PE=4 --bind-to core \
     2>&1 | tee ${OUTPUT_FILE}
 
 ```
-## Submit jobs
-To submit jobs, we run command in [submit_job_hoomd.txt](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/submit_job_hoomd.txt)  
 
-# Reference Results
-## Performance Metrics
-- Steps per second: This measures how fast the system can simulate particle movements over time
-- Execution time (s): This shows how long the task takes to complete
-- Speedup: This measures how much faster a task completes when multiple processors are used compared to using a single processor
-- Efficiency: This measures how effectively the processors are being used in parallel
+# Different of Baseline vs Optimized Script
+## PBS Script Changes
+| Feature          | Baseline             | Optimized           |
+|------------------|----------------------|---------------------|
+| Resources        | 'ncpus=04,mem=208gb' | ncpus=416+mem2048gb'|      
+| Nodes            | 1 node               | 4 node              |
+## Key Script Modification
+### Added in optimized version
+```
 
-## Value initialization
-| Number of nodes | Number of cores used | Warmup/Benchmark   | Walltime Requested | Memory Requested |
-|------------------|----------------------|--------------------|--------------------|------------------|
-| 1 x 2            | 48 x 1              | 40,000/80,000      | 10 mins            | 48GB             |
-| 2 x 2            | 48 x 2              | 40,000/80,000      | 10 mins            | 96GB             |
-| 4 x 2            | 48 x 4              | 40,000/80,000      | 10 mins            | 192GB            |
-| 8 x 2            | 48 x 8              | 40,000/80,000      | 10 mins            | 384GB            |
-| 16 x 2           | 48 x 16             | 10,000/160,000     | 10 mins            | 768GB            |
-| 32 x 2           | 48 x 32             | 10,000/320,000     | 10 mins            | 1536GB           |
+# OpenMP thread control
+export OMP_NUM_THREADS=4
+export OMP_PLACES=cores
+export OMP_PROC_BIND=close
 
+# UCX optimization
+export UCX_LOG_LEVEL=error
+export UCX_MEMTYPE_CACHE=n
+
+```
+### Working directory change
+```
+
+# Baseline:
+mkdir -p ${HOME}/scratch/${USER}/nwchem/run/${PBS_JOBID}
+cd       ${HOME}/scratch/${USER}/nwchem/run/${PBS_JOBID}
+
+# Optimized:
+mkdir -p /scratch/${USER}/${PBS_JOBID}
+cd /scratch/${USER}/${PBS_JOBID}
+
+```
+### MPI execution change
+```
+
+# Baseline: Pure MPI (104 processes)
+mpirun -np ${NCPUS:-104} nwchem ...
+
+# Optimized: Hybrid MPI+OpenMP (104 MPI × 4 OpenMP)
+mpirun -np 104 --map-by ppr:26:node:PE=4 --bind-to core nwchem ...
+```
+
+### NWChem Input File Changes
+
+| Feature | Baseline | Optimized | Impact |
+|---------|----------|-----------|--------|
+| **Scratch directory** | `scratch_dir /tmp` | `scratch_dir /scratch/${USER}/${PBS_JOBID}` | Better I/O on parallel filesystem |
+| **Calculation workflow** | SCF + DFT (two-step) | Direct DFT (single-step) | Simpler, faster startup |
+| **Integral method** | `direct` (recompute) | `semidirect memsize 2000000000 filesize 0` | 2-5x faster with memory caching |
+| **Initial vectors** | SCF orbitals from file | Atomic orbitals | No intermediate files needed |
+
+**Removed from optimized version:**
+```
+# SCF pre-calculation removed
+scf
+  direct
+  singlet
+  rhf
+  thresh 1e-7
+  maxiter 100
+  vectors input atomic output w12_scf_cc-pvtz.movecs
+  noprint "final vectors analysis" "final vector symmetries"
+end
+
+task scf energy ignore
+```
+
+**Key optimization in DFT block:**
+```
+# Baseline:
+dft
+  direct
+  xc b3lyp
+  grid fine
+  iterations 100
+  vectors input w12_scf_cc-pvtz.movecs
+  ...
+end
+
+# Optimized:
+dft
+  semidirect memsize 2000000000 filesize 0
+  xc b3lyp
+  grid fine
+  iterations 100
+  vectors input atomic
+  ...
+end
+
+```
 ## Results
 | Number of nodes | Number of cores used | Total Cores | Memory requested (GB) | Walltime Used | Memory Used (GB) | Steps per second |
 |------------------|----------------------|-------------|------------------------|---------------|------------------|------------------|
