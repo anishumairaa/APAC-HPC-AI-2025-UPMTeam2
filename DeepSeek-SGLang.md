@@ -176,6 +176,8 @@ wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/r
 ```
 ## Configuring parameters
 Our implementation are proven to follow all competition rules.  
+### Requirements; Library Dependencies
+Please refer to [requirements.txt](UPMTeam2_deepseek/build/requirements.txt)
 ### System Settings
 ```
 module load cuda
