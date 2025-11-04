@@ -255,7 +255,6 @@ time mpirun -np 104 --map-by ppr:26:node:PE=4 --bind-to core \
 ## Key Script Modification
 ### Added in optimized version
 ```
-
 # OpenMP thread control
 export OMP_NUM_THREADS=4
 export OMP_PLACES=cores
@@ -264,11 +263,9 @@ export OMP_PROC_BIND=close
 # UCX optimization
 export UCX_LOG_LEVEL=error
 export UCX_MEMTYPE_CACHE=n
-
 ```
 ### Working directory change
 ```
-
 # Baseline:
 mkdir -p ${HOME}/scratch/${USER}/nwchem/run/${PBS_JOBID}
 cd       ${HOME}/scratch/${USER}/nwchem/run/${PBS_JOBID}
@@ -276,11 +273,9 @@ cd       ${HOME}/scratch/${USER}/nwchem/run/${PBS_JOBID}
 # Optimized:
 mkdir -p /scratch/${USER}/${PBS_JOBID}
 cd /scratch/${USER}/${PBS_JOBID}
-
 ```
 ### MPI execution change
 ```
-
 # Baseline: Pure MPI (104 processes)
 mpirun -np ${NCPUS:-104} nwchem ...
 
@@ -334,7 +329,6 @@ dft
   vectors input atomic
   ...
 end
-
 ```
 ## Results
 | Number of nodes | Number of cores used | Total Cores | Memory requested (GB) | Walltime Used | Memory Used (GB) | Steps per second |
