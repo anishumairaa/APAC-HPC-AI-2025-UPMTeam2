@@ -103,7 +103,6 @@ time /usr/mpi/gcc/openmpi-4.1.7a1/bin/mpirun \
   " 2>&1 | tee ${HOME}/scratch/run/stdout.sglang-warmup.${PBS_JOBID}
 ```
 ## Diff of baseline vs finetuned script
-```
 We added and modified few lines in `sglang-warmup.sh`, that are:
 ```
 export CUDA_DEVICE_MAX_CONNECTIONS=1
@@ -143,6 +142,8 @@ COMMON_FLAGS="\
   " || true
 
 ```
+
+
 ## Submit jobs
 To submit jobs, we run command in [submit_job_llama.txt ](https://github.com/anishumairaa/HPC-AI-UPM-Team-3/blob/main/script_job_output_logs/submit_job_llama.txt)  
 
