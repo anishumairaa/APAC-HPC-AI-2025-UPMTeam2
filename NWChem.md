@@ -331,7 +331,7 @@ dft
 end
 ```
 # Performance Results
-## Table 1 Node: Node and MPI Process Scaling
+## Table 1: Node and MPI Process Scaling
 | Feature | Baseline (1 node) | Optimized (1 node) | Optimized (2 nodes) | Optimized (4 nodes) | Impact |
 |---------|-------------------|-------------------|---------------------|---------------------|--------|
 | **Nodes** | 1 | 1 | 2 | 4 | More parallel resources |
@@ -343,6 +343,17 @@ end
 | **Thread Binding** | None | `--bind-to core` | `--bind-to core` | `--bind-to core` | Better cache locality |
 | **Wall Time (s)** | 241.8 | 149.6 | 75.3 | 45.0 | Progressive improvement |
 | **Speedup vs Baseline** | 1.00× | 1.62× | 3.21× | 5.37× | Up to 5.37× faster |
+
+## Table 2: Memory Configuration Impact
+| Feature | Low Memory | Medium Memory | High Memory | Impact |
+|---------|-----------|---------------|-------------|--------|
+| **Stack (MB)** | 4000 | 8000 | 16000 | More per-process memory |
+| **Heap (MB)** | 50 | 100 | 200 | Minimal impact |
+| **Global (MB)** | 5000 | 8000 | 16000 | More parallel memory |
+| **Total per Process (MB)** | ~9,050 | ~16,100 | ~32,200 | 3.5× difference |
+| **Total Memory (104 procs)** | ~941 GB | ~1,674 GB | ~3,349 GB | Higher utilization |
+| **Wall Time (s)** | 44.8 | 45.0 | 36.5 | 18% improvement |
+| **Speedup vs Baseline** | 5.40× | 5.37× | 6.63× | Best: 6.63× |
 
 ## Result Analysis 
 The steps per second increases substantially with a higher number of nodes:
