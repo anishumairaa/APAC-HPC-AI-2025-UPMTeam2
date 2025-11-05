@@ -274,14 +274,14 @@ This disables TF32 because it uses less precision, which is fewer decimal digits
 [1,0]<stdout>:====== Offline Throughput Benchmark Result =======
 [1,0]<stdout>:Backend:                                 engine    
 [1,0]<stdout>:Successful requests:                     2000      
-[1,0]<stdout>:Benchmark duration (s):                  172.37    
+[1,0]<stdout>:Benchmark duration (s):                  173.88    
 [1,0]<stdout>:Total input tokens:                      626729    
 [1,0]<stdout>:Total generated tokens:                  388685    
-[1,0]<stdout>:Last generation throughput (tok/s):      33.36     
-[1,0]<stdout>:Request throughput (req/s):              11.60     
-[1,0]<stdout>:Input token throughput (tok/s):          3635.89   
-[1,0]<stdout>:Output token throughput (tok/s):         2254.91   
-[1,0]<stdout>:Total token throughput (tok/s):          5890.80   
+[1,0]<stdout>:Last generation throughput (tok/s):      34.26     
+[1,0]<stdout>:Request throughput (req/s):              11.50     
+[1,0]<stdout>:Input token throughput (tok/s):          3604.32  
+[1,0]<stdout>:Output token throughput (tok/s):         2253.33   
+[1,0]<stdout>:Total token throughput (tok/s):          5839.65   
 [1,0]<stdout>:==================================================
 ```
 ### Our Fine-tuned `sglang-warmup.sh`
@@ -305,10 +305,10 @@ This disables TF32 because it uses less precision, which is fewer decimal digits
 
 | Metric | Baseline | Optimized (Our Code) | Improvement |
 |:--------|:----------:|:--------------------:|:-------------:|
-| **Total token throughput (tok/s)** | 5,890.00 | **6,481.80** | 🔺 **+11.0%** |
-| **Input token throughput (tok/s)** | 3,635.89 | **4,000.69** | 🔺 **+11.0%** |
-| **Output token throughput (tok/s)** | 2254.91 | **2,481.15** | 🔺 **+11.0%** |
-| **Requests throughput (req/s)** | 11.60| **12.77** | 🔺 **+11.0%** |
+| **Total token throughput (tok/s)** | 5,839.65 | **6,481.80** | 🔺 **+11.0%** |
+| **Input token throughput (tok/s)** | 3,604.32 | **4,000.69** | 🔺 **+11.0%** |
+| **Output token throughput (tok/s)** | 2235.33 | **2,481.15** | 🔺 **+11.0%** |
+| **Requests throughput (req/s)** | 11.50| **12.77** | 🔺 **+11.0%** |
 
 > ✅ Our optimized **SGLang-based DeepSeek inference** achieved over **2× throughput improvement** by applying communication, CUDA, and MPI optimizations.
 
