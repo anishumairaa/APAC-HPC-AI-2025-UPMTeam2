@@ -195,8 +195,8 @@ module load cuda
 - MPI processes: 2 per node  
 
 ### Model and Dataset Settings
-- model_path = deepseek-ai/DeepSeek-R1
-- dataset_path = ${HOME}/scratch/ShareGPT_V3_unfiltered_cleaned_split.json
+- model_path = `deepseek-ai/DeepSeek-R1`
+- dataset_path = `${HOME}/scratch/ShareGPT_V3_unfiltered_cleaned_split.json`
 - num_prompts = 2000
 - load_format = dummy
 - seed = 2025
