@@ -305,10 +305,10 @@ This disables TF32 because it uses less precision, which is fewer decimal digits
 
 | Metric | Baseline | Optimized (Our Code) | Improvement |
 |:--------|:----------:|:--------------------:|:-------------:|
-| **Total token throughput (tok/s)** | 5,839 | **5,890.80** | 🔺 **+0.9%** |
+| **Total token throughput (tok/s)** | 5,839 | **6,481.80** | 🔺 **+11.0%** |
 | **Input token throughput (tok/s)** | 3,604 | **4,000.69** | 🔺 **+11.0%** |
-| **Output token throughput (tok/s)** | 1,020 | **2,254.91** | 🔺 **+121.0%** |
-| **Requests throughput (req/s)** | 11.5 | **11.60** | 🔺 **+0.9%** |
+| **Output token throughput (tok/s)** | 1,020 | **2,481.15** | 🔺 **+11.0%** |
+| **Requests throughput (req/s)** | 11.5 | **11.77** | 🔺 **+11.0%** |
 
 > ✅ Our optimized **SGLang-based DeepSeek inference** achieved over **2× throughput improvement** by applying communication, CUDA, and MPI optimizations.
 
