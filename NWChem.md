@@ -330,7 +330,7 @@ dft
   ...
 end
 ```
-# Configuraion Instructions
+# Configuration Instructions
 ## Build Instructions
 ### Prerequisies and Enviroment Setup
 ```
