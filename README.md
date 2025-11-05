@@ -3,7 +3,7 @@
 
 Welcome to our project submission for the APAC HPC-AI Competition 2025. This README file provides an overview of our project, the methodologies used, and the results obtained.
 
-Please review https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2
+Please review [NWChem.md](https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/61ca8fa012296e450dacf776160396d5c6724177/NWChem.md) and [DeepSeek.md](https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/61ca8fa012296e450dacf776160396d5c6724177/DeepSeek-SGLang.md) for comprehensive explanation on each task.
 
 # Team Members
 * Anis Humaira Azman - Team leader
