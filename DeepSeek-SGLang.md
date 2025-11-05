@@ -349,5 +349,5 @@ Distributed execution across 2 nodes × 8 GPUs each (16 total) for higher scalab
 
 Although our script has improved slightly in the training speed, but our script is focused on improving inter-node communication performance and stability where shared memory access might cause bottlenecks or instability. In HPC environments where data transfer between GPUs needs efficiency, which can increase training speed. Thus, it is important to concentrated on communication settings in this job.
 
-#### 'sglang-warmup.sh' Output File
+#### `sglang-warmup.sh` Output File
 Our output file for `sglang-warmup.sh` is in [stdout.sglang-warmup.89389.pbs111](UPMTeam2_deepseek/results/stdout.sglang-warmup.89389.pbs111) 
