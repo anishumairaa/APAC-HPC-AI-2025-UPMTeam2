@@ -1,4 +1,11 @@
-# DeepSeek-SGLang Base Code
+# DeepSeek-SGLang
+Contains:
+1. [Base Code Information](https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/DeepSeek-SGLang.md#base-code-information)
+2. [Script Modifications](https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/DeepSeek-SGLang.md#script-modifications)
+3. [Configuration Instructions](https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/DeepSeek-SGLang.md#configuration-instructions)
+4. [Runtime Optimization](https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/DeepSeek-SGLang.md#runtime-optimization)
+5. [Reference Results](https://github.com/anishumairaa/APAC-HPC-AI-2025-UPMTeam2/blob/main/DeepSeek-SGLang.md#reference-results)
+   
 ## Base Code Information
 We are using Aspire2P as our cluster.  
 This project used the base script `sglang.sh` from [2025-APAC-HPC-AI. ](https://github.com/hpcac/2025-APAC-HPC-AI/blob/main/5_1_SGLang_DeepSeek_Application_Notes_ASPIRE2A%2B.md)  **This script is used as baseline.**  
